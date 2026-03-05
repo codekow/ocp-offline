@@ -1,3 +1,4 @@
+# hadolint global ignore=DL3041
 FROM registry.access.redhat.com/ubi9/ubi-minimal:9.6 as downloader
 
 WORKDIR /download
@@ -9,15 +10,14 @@ RUN microdnf update -y && \
 ARG GIT_REPO=https://github.com/redhat-na-ssa/demo-ai-gitops-catalog
 RUN git clone "${GIT_REPO}" demo_ops
 
-FROM registry.access.redhat.com/ubi9/ubi-micro:9.6
+FROM registry.access.redhat.com/ubi9/ubi-micro:9.6 as final
 
 # install: cli tools
 ADD tools-x86_64.tgz /
 
-WORKDIR /artifacts
-COPY --from=downloader /download /artifacts
-
-ENV PATH=/artifacts/bin:$PATH
+ENV HOME=/offline
+WORKDIR /offline
+COPY --from=downloader /download /offline
 
 # Set the user to 1001
 USER 1001
