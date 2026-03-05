@@ -1,26 +1,34 @@
 # hadolint global ignore=DL3041
-FROM registry.access.redhat.com/ubi9/ubi-minimal:9.6 AS downloader
+FROM registry.access.redhat.com/ubi9/ubi-minimal:9.7 AS downloader
 
 WORKDIR /download
 
 RUN microdnf update -y && \
-    microdnf install -y wget git curl-minimal && \
+    microdnf install -y wget git curl-minimal bash-completion && \
     microdnf clean all
 
 ARG GIT_REPO=https://github.com/redhat-na-ssa/demo-ai-gitops-catalog
 RUN git clone "${GIT_REPO}" demo_ops
 
-FROM registry.access.redhat.com/ubi9/ubi-micro:9.6
+FROM registry.access.redhat.com/ubi9/ubi-minimal:9.7
+
+RUN microdnf update -y && \
+    microdnf install -y bash-completion && \
+    microdnf clean all && \
+    cp -a /etc/skel /offline && \
+    chmod -R g+w /offline
 
 # install: cli tools
 ADD tools-x86_64.tgz /
 
+COPY --from=downloader /download /offline
+
 ENV HOME=/offline
 WORKDIR /offline
-COPY --from=downloader /download /offline
 
 # Set the user to 1001
 USER 1001
+
 
 LABEL org.opencontainers.image.description="CLI tools required for an OpenShift disconnected install" \
       org.opencontainers.image.source=https://github.com/codekow/ocp-offline
