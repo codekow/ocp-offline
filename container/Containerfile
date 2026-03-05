@@ -1,0 +1,24 @@
+FROM registry.access.redhat.com/ubi9/ubi-minimal:9.6 as downloader
+
+WORKDIR /download
+
+RUN microdnf update -y && \
+    microdnf install -y wget git curl-minimal && \
+    microdnf clean all
+
+ARG GIT_REPO=https://github.com/redhat-na-ssa/demo-ai-gitops-catalog
+RUN git clone "${GIT_REPO}" demo_ops
+
+FROM registry.access.redhat.com/ubi9/ubi-micro:9.6
+
+# install: cli tools
+ADD tools-x86_64.tgz /
+
+WORKDIR /artifacts
+COPY --from=downloader /download /artifacts
+COPY . /scratch/bin /artifacts/bin
+
+ENV PATH=/artifacts/bin:$PATH
+
+# Set the user to 1001
+USER 1001
