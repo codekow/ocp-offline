@@ -27,6 +27,11 @@ bin_check(){
   "
 
   case ${name} in
+    oc-mirror)
+      ${name} --v2 completion bash > "${BASH_COMP}/${name}.sh"
+      ${name} --v2 --output=yaml version 2>&1 || ${name} --version
+      rm -f .oc-mirror.log
+      ;;
     kubectl|oc|odo|virtctl)
       ${name} completion bash > "${BASH_COMP}/${name}.sh"
       ${name} version --client 2>&1
@@ -37,12 +42,6 @@ bin_check(){
     hcp|helm|kit|tkn|k9s|kn|kustomize|openshift-install|opm|oras|s2i|subctl|crane|dive)
       ${name} completion bash > "${BASH_COMP}/${name}.sh"
       ${name} version 2>&1 || ${name} --version
-      rm -f .oc-mirror.log
-      ;;
-    oc-mirror)
-      ${name} --v2 completion bash > "${BASH_COMP}/${name}.sh"
-      ${name} --v2 --output=yaml version 2>&1 || ${name} --version
-      rm -f .oc-mirror.log
       ;;
     rhoas)
       export RHOAS_TELEMETRY=false
