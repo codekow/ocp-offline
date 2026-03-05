@@ -191,13 +191,13 @@ download_mirror-registry(){
 }
 
 download_oc(){
-  BIN_VERSION=stable-4.18
+  BIN_VERSION=4.20.12
   DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/ocp/${BIN_VERSION}/openshift-client-${OS:-linux}.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" oc kubectl
 }
 
 download_oc-mirror(){
-  BIN_VERSION=latest
+  BIN_VERSION=4.20.12
   DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/ocp/${BIN_VERSION}/oc-mirror.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
   chmod +x "${BIN_PATH}/oc-mirror"
@@ -210,15 +210,15 @@ download_odo(){
 }
 
 download_openshift-install(){
-  BIN_VERSION=4.18.22
-  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/ocp/${BIN_VERSION}/openshift-install-linux.tar.gz
+  BIN_VERSION=4.20.12
+  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/ocp/${BIN_VERSION}/openshift-install-${OS:-linux}.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" openshift-install
   chmod +x "${BIN_PATH}/openshift-install"
 }
 
 download_opm(){
-  BIN_VERSION=latest
-  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/ocp/${BIN_VERSION}/opm-linux.tar.gz
+  BIN_VERSION=4.20.12
+  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/ocp/${BIN_VERSION}/opm-${OS:-linux}.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
 }
 
