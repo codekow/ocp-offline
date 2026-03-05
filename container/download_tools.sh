@@ -26,5 +26,5 @@ bin_check openshift-install
 
 chmod 755 "${BIN_PATH}"/*
 
-rm "${BIN_PATH}"/LICENSE
+rm "${BIN_PATH}"/LICENSE || true
 tar -czf tools-x86_64.tgz -C scratch . --owner=0 --group=0
