@@ -68,6 +68,6 @@ jobs:
           file: container/Containerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ghcr.io/${{ github.repository_owner }}/${{ repo-name }}:git-${{ outputs.git-sha }}
-            ghcr.io/${{ github.repository_owner }}/${{ repo-name }}:latest
-          labels: org.opencontainers.image.version=${{ steps.git-sha.outputs.sha }}
+            ghcr.io/${{ github.repository_owner }}/${{ outputs.repo-name }}:git-${{ outputs.git-sha }}
+            ghcr.io/${{ github.repository_owner }}/${{ outputs.repo-name }}:latest
+          labels: org.opencontainers.image.version=${{ outputs.git-sha }}
