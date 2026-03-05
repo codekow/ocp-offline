@@ -77,7 +77,7 @@ bin_check(){
 
 download_age(){
   BIN_VERSION=${1:-1.2.0}
-  DOWNLOAD_URL=https://github.com/FiloSottile/age/releases/download/v${BIN_VERSION}/age-v${BIN_VERSION}-linux-amd64.tar.gz
+  DOWNLOAD_URL=https://github.com/FiloSottile/age/releases/download/v${BIN_VERSION}/age-v${BIN_VERSION}-${OS:-linux}-amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar vzx --strip-components=1 -C "${BIN_PATH}/"
   chmod +x "${BIN_PATH}"/age*
 }
@@ -114,7 +114,7 @@ download_crane(){
 
 download_dive(){
   BIN_VERSION=${1:-0.13.1}
-  DOWNLOAD_URL=https://github.com/wagoodman/dive/releases/download/v${BIN_VERSION}/dive_${BIN_VERSION}_linux_amd64.tar.gz
+  DOWNLOAD_URL=https://github.com/wagoodman/dive/releases/download/v${BIN_VERSION}/dive_${BIN_VERSION}_${OS:-linux}_amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" dive
   chmod +x "${BIN_PATH}/dive"
 }
@@ -122,22 +122,22 @@ download_dive(){
 download_hcp(){
   BIN_VERSION=${1:-2.8.2-8}
   # https://developers.redhat.com/content-gateway/rest/browse/pub/mce/clients/hcp-cli/
-  DOWNLOAD_URL=https://developers.redhat.com/content-gateway/file/pub/mce/clients/hcp-cli/${BIN_VERSION}/hcp-cli-${BIN_VERSION}-linux-amd64.tar.gz
+  DOWNLOAD_URL=https://developers.redhat.com/content-gateway/file/pub/mce/clients/hcp-cli/${BIN_VERSION}/hcp-cli-${BIN_VERSION}-${OS:-linux}-amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
 }
 
 download_helm(){
   BIN_VERSION=${1:-latest}
-  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/helm/${BIN_VERSION}/helm-linux-amd64.tar.gz
-  curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" helm-linux-amd64
-  mv "${BIN_PATH}/helm-linux-amd64" "${BIN_PATH}/helm"
+  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/helm/${BIN_VERSION}/helm-${OS:-linux}-amd64.tar.gz
+  curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" helm-${OS:-linux}-amd64
+  mv "${BIN_PATH}/helm-${OS:-linux}-amd64" "${BIN_PATH}/helm"
 }
 
 download_helmfile(){
   BIN_VERSION=${1:-1.1.7}
-  DOWNLOAD_URL=https://github.com/helmfile/helmfile/releases/download/v${BIN_VERSION}/helmfile_${BIN_VERSION}_linux_amd64.tar.gz
+  DOWNLOAD_URL=https://github.com/helmfile/helmfile/releases/download/v${BIN_VERSION}/helmfile_${BIN_VERSION}_${OS:-linux}_amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
-  mv "${BIN_PATH}/helm-linux-amd64" "${BIN_PATH}/helm"
+  mv "${BIN_PATH}/helm-${OS:-linux}-amd64" "${BIN_PATH}/helm"
 }
 
 download_k9s(){
@@ -149,16 +149,16 @@ download_k9s(){
 }
 
 download_kit(){
-  DOWNLOAD_URL=https://github.com/jozu-ai/kitops/releases/latest/download/kitops-linux-x86_64.tar.gz
+  DOWNLOAD_URL=https://github.com/jozu-ai/kitops/releases/latest/download/kitops-${OS:-linux}-x86_64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" kit
   chmod +x "${BIN_PATH}/kit"
 }
 
 download_kn(){
   BIN_VERSION=${1:-latest}
-  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/serverless/${BIN_VERSION}/kn-linux-amd64.tar.gz
+  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/serverless/${BIN_VERSION}/kn-${OS:-linux}-amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
-  mv "${BIN_PATH}/kn-linux-amd64" "${BIN_PATH}/kn"
+  mv "${BIN_PATH}/kn-${OS:-linux}-amd64" "${BIN_PATH}/kn"
 }
 
 download_krew(){
@@ -173,21 +173,21 @@ download_krew(){
 
 download_kubectl(){
   BIN_VERSION=${1:-$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)}
-  DOWNLOAD_URL=https://storage.googleapis.com/kubernetes-release/release/${BIN_VERSION}/bin/linux/amd64/kubectl
+  DOWNLOAD_URL=https://storage.googleapis.com/kubernetes-release/release/${BIN_VERSION}/bin/${OS:-linux}/amd64/kubectl
   curl "${DOWNLOAD_URL}" -sLo "${BIN_PATH}/kubectl"
   chmod +x "${BIN_PATH}/kubectl"
 }
 
 download_kubectl-operator(){
   BIN_VERSION=${1:-0.5.1}
-  DOWNLOAD_URL=https://github.com/operator-framework/kubectl-operator/releases/download/v${BIN_VERSION}/kubectl-operator_v${BIN_VERSION}_linux_amd64.tar.gz
+  DOWNLOAD_URL=https://github.com/operator-framework/kubectl-operator/releases/download/v${BIN_VERSION}/kubectl-operator_v${BIN_VERSION}_${OS:-linux}_amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar vzx -C "${BIN_PATH}/"
   chmod +x "${BIN_PATH}/kubectl-operator"
 }
 
 download_kustomize(){
   BIN_VERSION=${1:-5.7.0}
-  DOWNLOAD_URL=https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${BIN_VERSION}/kustomize_v${BIN_VERSION}_linux_amd64.tar.gz
+  DOWNLOAD_URL=https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${BIN_VERSION}/kustomize_v${BIN_VERSION}_${OS:-linux}_amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" kustomize
 }
 
@@ -233,76 +233,76 @@ download_opm(){
 
 download_oras(){
   BIN_VERSION=${1:-1.2.3}
-  DOWNLOAD_URL=https://github.com/oras-project/oras/releases/download/v${BIN_VERSION}/oras_${BIN_VERSION}_linux_amd64.tar.gz
+  DOWNLOAD_URL=https://github.com/oras-project/oras/releases/download/v${BIN_VERSION}/oras_${BIN_VERSION}_${OS:-linux}_amd64.tar.gz
   echo $DOWNLOAD_URL
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" oras
   chmod +x "${BIN_PATH}/oras"
 }
 
 download_rclone(){
-  curl -LsO https://downloads.rclone.org/rclone-current-linux-amd64.zip
-  unzip rclone-current-linux-amd64.zip
+  curl -LsO https://downloads.rclone.org/rclone-current-${OS:-linux}-amd64.zip
+  unzip rclone-current-${OS:-linux}-amd64.zip
 
-  cp rclone-*-linux-amd64/rclone "${BIN_PATH}/rclone"
+  cp rclone-*-${OS:-linux}-amd64/rclone "${BIN_PATH}/rclone"
   chmod +x "${BIN_PATH}/rclone"
 
-  rm -rf rclone-*-linux-amd64*
+  rm -rf rclone-*-${OS:-linux}-amd64*
 }
 
 download_restic(){
   BIN_VERSION=${1:-0.18.0}
-  DOWNLOAD_URL=https://github.com/restic/restic/releases/download/v${BIN_VERSION}/restic_${BIN_VERSION}_linux_amd64.bz2
+  DOWNLOAD_URL=https://github.com/restic/restic/releases/download/v${BIN_VERSION}/restic_${BIN_VERSION}_${OS:-linux}_amd64.bz2
   curl "${DOWNLOAD_URL}" -sL | bzcat > "${BIN_PATH}/restic"
   chmod +x "${BIN_PATH}/restic"
 }
 
 download_rhoas(){
   BIN_VERSION=${1:-0.53.0}
-  DOWNLOAD_URL=https://github.com/redhat-developer/app-services-cli/releases/download/v${BIN_VERSION}/rhoas_${BIN_VERSION}_linux_amd64.tar.gz
+  DOWNLOAD_URL=https://github.com/redhat-developer/app-services-cli/releases/download/v${BIN_VERSION}/rhoas_${BIN_VERSION}_${OS:-linux}_amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx --strip-components=1 -C "${BIN_PATH}/"
 }
 
 download_s2i(){
   # BIN_VERSION=
-  DOWNLOAD_URL=https://github.com/openshift/source-to-image/releases/download/v1.5.1/source-to-image-v1.5.1-c301811d-linux-amd64.tar.gz
+  DOWNLOAD_URL=https://github.com/openshift/source-to-image/releases/download/v1.5.1/source-to-image-v1.5.1-c301811d-${OS:-linux}-amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
 }
 
 download_sops(){
   BIN_VERSION=${1:-3.10.2}
-  DOWNLOAD_URL=https://github.com/getsops/sops/releases/download/v${BIN_VERSION}/sops-v${BIN_VERSION}.linux.amd64
+  DOWNLOAD_URL=https://github.com/getsops/sops/releases/download/v${BIN_VERSION}/sops-v${BIN_VERSION}.${OS:-linux}.amd64
   curl "${DOWNLOAD_URL}" -sLo "${BIN_PATH}/sops"
   chmod +x "${BIN_PATH}/sops"
 }
 
 download_subctl(){
   BIN_VERSION=${1:-0.20.1}
-  DOWNLOAD_URL=https://github.com/submariner-io/releases/releases/download/v${BIN_VERSION}/subctl-v${BIN_VERSION}-linux-amd64.tar.xz
+  DOWNLOAD_URL=https://github.com/submariner-io/releases/releases/download/v${BIN_VERSION}/subctl-v${BIN_VERSION}-${OS:-linux}-amd64.tar.xz
   curl "${DOWNLOAD_URL}" -sL | tar Jx --strip-components=1 -C "${BIN_PATH}/"
 }
 
 download_tkn(){
   BIN_VERSION=${1:-latest}
-  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/pipeline/${BIN_VERSION}/tkn-linux-amd64.tar.gz
+  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/pipeline/${BIN_VERSION}/tkn-${OS:-linux}-amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
 }
 
 download_uv(){
   BIN_VERSION=${1:-0.9.6}
-  DOWNLOAD_URL=https://github.com/astral-sh/uv/releases/download/${BIN_VERSION}/uv-x86_64-unknown-linux-gnu.tar.gz
+  DOWNLOAD_URL=https://github.com/astral-sh/uv/releases/download/${BIN_VERSION}/uv-x86_64-unknown-${OS:-linux}-gnu.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx --strip-components=1 -C "${BIN_PATH}/"
 }
 
 download_virtctl(){
   BIN_VERSION=${1:-1.5.2}
-  DOWNLOAD_URL=https://github.com/kubevirt/kubevirt/releases/download/v${BIN_VERSION}/virtctl-v${BIN_VERSION}-linux-amd64
+  DOWNLOAD_URL=https://github.com/kubevirt/kubevirt/releases/download/v${BIN_VERSION}/virtctl-v${BIN_VERSION}-${OS:-linux}-amd64
   curl "${DOWNLOAD_URL}" -sL -o "${BIN_PATH}/virtctl"
   chmod +x "${BIN_PATH}/virtctl"
 }
 
 download_yq(){
   BIN_VERSION=${1:-4.45.4}
-  DOWNLOAD_URL=https://github.com/mikefarah/yq/releases/download/v${BIN_VERSION}/yq_linux_amd64
+  DOWNLOAD_URL=https://github.com/mikefarah/yq/releases/download/v${BIN_VERSION}/yq_${OS:-linux}_amd64
   curl "${DOWNLOAD_URL}" -sLo "${BIN_PATH}/yq"
   chmod +x "${BIN_PATH}/yq"
 }
