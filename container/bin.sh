@@ -34,9 +34,14 @@ bin_check(){
           kubectl completion bash > "${BASH_COMP}/kubectl.sh"
       fi
       ;;
-    hcp|helm|kit|tkn|k9s|kn|kustomize|oc-mirror|openshift-install|opm|oras|s2i|subctl|crane|dive)
+    hcp|helm|kit|tkn|k9s|kn|kustomize|openshift-install|opm|oras|s2i|subctl|crane|dive)
       ${name} completion bash > "${BASH_COMP}/${name}.sh"
       ${name} version 2>&1 || ${name} --version
+      rm -f .oc-mirror.log
+      ;;
+    oc-mirror)
+      ${name} --v2 completion bash > "${BASH_COMP}/${name}.sh"
+      ${name} --v2 --output=yaml version 2>&1 || ${name} --version
       rm -f .oc-mirror.log
       ;;
     rhoas)
