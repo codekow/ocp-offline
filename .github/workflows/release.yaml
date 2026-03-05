@@ -1,0 +1,38 @@
+name: Build Release
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '17 2 1 * *'
+
+permissions: write-all
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache tooling binaries
+        uses: actions/cache@v4
+        id: cache-tooling-binaries
+        with:
+          path: container/tools-x86_64.tgz
+          key: ${{ hashFiles('container/bin.sh', 'container/download_tools.sh') }}
+
+      - name: Download tooling binaries
+        if: steps.cache-tooling-binaries.outputs.cache-hit != 'true'
+        run: |
+          cd container
+          ./download_tools.sh
+
+      - name: Release Build Artifacts
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          allowUpdates: true
+          prerelease: false
+          name: CLIs for OpenShift install
+          tag: latest
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: container/tools-x86_64.tgz
