@@ -28,7 +28,7 @@ jobs:
 
     outputs:
       git-sha: ${{ steps.git-sha.outputs.sha }}
-      repo-name: ocp-offline
+      # repo-name: ocp-offline
 
     steps:
       - name: Checkout repository
