@@ -36,13 +36,12 @@ jobs:
         id: meta
         run: |
           echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          echo "name=ocp-offline" >> $GITHUB_OUTPUT
 
       - name: Cache tooling binaries
         uses: actions/cache@v4
         id: cache-tooling-binaries
         with:
-          path: scratch/tools-x86_64.tgz
+          path: container/tools-x86_64.tgz
           key: ${{ hashFiles('container/bin.sh', 'container/download_tools.sh') }}
 
       - name: Download tooling binaries
