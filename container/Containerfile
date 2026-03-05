@@ -1,5 +1,5 @@
 # hadolint global ignore=DL3041
-FROM registry.access.redhat.com/ubi9/ubi-minimal:9.6 as downloader
+FROM registry.access.redhat.com/ubi9/ubi-minimal:9.6 AS downloader
 
 WORKDIR /download
 
@@ -10,7 +10,7 @@ RUN microdnf update -y && \
 ARG GIT_REPO=https://github.com/redhat-na-ssa/demo-ai-gitops-catalog
 RUN git clone "${GIT_REPO}" demo_ops
 
-FROM registry.access.redhat.com/ubi9/ubi-micro:9.6 as final
+FROM registry.access.redhat.com/ubi9/ubi-micro:9.6
 
 # install: cli tools
 ADD tools-x86_64.tgz /
