@@ -10,7 +10,7 @@ BASH_COMP=scratch/etc/bash_completion.d
 
 PATH=${BIN_PATH}:${PATH}
 
-SCRIPT_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.20/scripts/library
+SCRIPT_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/main/scripts/library
 
 [ -e bin.sh ] || curl -sLO "${SCRIPT_URL}/bin.sh"
 
