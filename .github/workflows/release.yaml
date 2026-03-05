@@ -32,7 +32,7 @@ jobs:
         with:
           allowUpdates: true
           prerelease: false
-          name: Banana BPI R3 Firmware v24.10.0
-          tag: v24.10.0-${{ env.REVISION }}
+          name: CLIs for OpenShift install
+          tag: latest
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: container/tools-x86_64.tgz
