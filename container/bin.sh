@@ -228,6 +228,7 @@ download_opm(){
   BIN_VERSION=${1:-4.20.12}
   DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/ocp/${BIN_VERSION}/opm-${OS:-linux}.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
+  mv "${BIN_PATH}/opm-rhel8" "${BIN_PATH}/opm"
 }
 
 download_oras(){
