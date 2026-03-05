@@ -1,4 +1,4 @@
-name: Build Firmware
+name: Build Tar Gzip
 on:
   workflow_dispatch:
   # schedule:
