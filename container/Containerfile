@@ -16,7 +16,6 @@ ADD tools-x86_64.tgz /
 
 WORKDIR /artifacts
 COPY --from=downloader /download /artifacts
-COPY . /scratch/bin /artifacts/bin
 
 ENV PATH=/artifacts/bin:$PATH
 

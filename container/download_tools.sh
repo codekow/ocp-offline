@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xeuo pipefail
+set -euo pipefail
 
 BIN_PATH=scratch/usr/local/bin
 BASH_COMP=scratch/etc/bash_completion.d
