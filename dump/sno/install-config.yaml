@@ -25,7 +25,9 @@ platform:
   none: {}
 pullSecret: ''
 sshKey: ''
-imageDigestSources:
+# imageDigestSources:
+# !! Deprecated might be a lie - trust the docs !!
+imageContentSources:
   - mirrors:
     - bootstrap-00:8443/redhat/openshift/release
     source: quay.io/openshift-release-dev/ocp-v4.0-art-dev

@@ -160,5 +160,5 @@ extract_iso(){
     --path=/coreos/coreos-x86_64.iso:${HOME}/.cache/agent/image_cache \
     --filter-by-os=linux/amd64 \
     --confirm \
-    $(hostname):8443/redhat/openshift/release:4.20.15-x86_64-rhel-coreos
+    $(hostname):8443/redhat/openshift/release:${OCP_VER:-4.20.15}-x86_64-rhel-coreos
 }
