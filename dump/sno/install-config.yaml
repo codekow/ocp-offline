@@ -23,7 +23,7 @@ networking:
   - 172.30.0.0/16
 platform:
   none: {}
-pullSecret: ''
+pullSecret: '{"auths": {"bootstrap-00:8443": {"auth": "aW5pdDphbG9uZ3Bhc3N3b3Jk"}}}'
 sshKey: ''
 # !! Deprecated - might be a lie - trust the docs !!
 # imageContentSources:

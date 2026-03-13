@@ -32,7 +32,7 @@ platform:
     - 10.3.0.121
     ingressVIPs:
     - 10.3.0.122
-pullSecret: ''
+pullSecret: '{"auths": {"bootstrap-00:8443": {"auth": "aW5pdDphbG9uZ3Bhc3N3b3Jk"}}}'
 sshKey: ''
 # !! Deprecated - might be a lie - trust the docs !!
 # imageContentSources:
