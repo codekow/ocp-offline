@@ -113,7 +113,6 @@ mirror_registry_uninstall(){
   sudo firewall-cmd --reload
 
   ./mirror-registry uninstall
-
 }
 
 pull_secret_merge_with_mirror(){

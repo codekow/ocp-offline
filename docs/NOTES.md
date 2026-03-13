@@ -40,7 +40,7 @@ download_files
 # oc_mirror_files2mirror
 
 # install mirror-registry
-cd scratch/mirror-registry
+cd quay
 mirror_registry_install /srv/registry
 cd ..
 
