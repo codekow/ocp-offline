@@ -26,6 +26,10 @@ cd ocp-install
 # setup functions
 . scripts/functions.sh
 
+download_files
+```
+
+```sh
 # setup autocomplete
 . <(oc completion bash)
 . <(oc-mirror --v2 completion bash)
@@ -37,23 +41,11 @@ podman login $(hostname):8443
 ```
 
 ```sh
-# combine pull-secret
-jq -s '.[0] * .[1]' pull-secret.txt ${XDG_RUNTIME_DIR}/containers/auth.json > merged-auth.json
+# oc_mirror_src2files
+# oc_mirror_files2mirror
 
-# update CA trust
-cp ${REG_PATH}/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchors/quay.pem
-update-ca-trust extract
+mirror_registry_install
 
-# open firewall (optional)
-firewall-cmd --add-port=8443/tcp --permanent
-firewall-cmd --reload
-```
+oc_mirror_src2mirror
 
-```sh
-TMPDIR=${PWD}/tmp \
-  ./oc-mirror --v2 -c ${PWD}/isc.yaml \
-  --from file://${PWD}/files \
-  --cache-dir ${PWD}/cache \
-  --dest-tls-verify=false \
-  --image-timeout 60m docker://$(hostname):8443/redhat
 ```

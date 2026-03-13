@@ -81,7 +81,7 @@ mirror_registry_install(){
 
   [ -x mirror-registry ] || return 0
 
-  REG_PATH=/srv/registry
+  REG_PATH=${1:-${PWD}}
   REG_USER=init
   REG_PASS=alongpassword
 
