@@ -11,6 +11,11 @@ download_files(){
   cd ${SCRATCH}
   [ -e tmp ] || mkdir tmp
 
+  # create pull-secret
+  # https://console.redhat.com/openshift/downloads#tool-pull-secret
+  # !! MANUAL !!
+  # vi pull-secret.txt
+
   # ocp mirror
   # https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/
 
@@ -127,6 +132,8 @@ pull_secret_merge_with_mirror(){
 }
 
 extract_ocp_tools(){
+  # https://access.redhat.com/solutions/7062500
+
   oc adm release extract \
     -a merged-auth.json \
     --command=openshift-install \
