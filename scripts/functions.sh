@@ -4,6 +4,13 @@ check_prereqs(){
   which nmstatectl || sudo dnf install /usr/bin/nmstatectl -y
 }
 
+check_cli(){
+  # verify cli in path
+  which oc && oc version 
+  which openshift-install && openshift-install version
+  which oc-mirror
+}
+
 download_files(){
   SCRATCH=${1:-${PWD}}
   OCP_VER=${2:-4.20.15}
@@ -51,12 +58,6 @@ download_files(){
 
   tar vzxf ../mirror-registry*.tar.gz
   cd ..
-
-  # verify cli in path
-  which oc && oc version 
-  which openshift-install && openshift-install version
-  which oc-mirror
-
 }
 
 oc_mirror_src2files(){
