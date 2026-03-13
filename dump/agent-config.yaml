@@ -1,34 +1,34 @@
 apiVersion: v1beta1
 kind: AgentConfig
 metadata:
-  name: sno-cluster
-rendezvousIP: 192.168.111.80
+  name: sno
+rendezvousIP: 10.3.0.101
 hosts:
-  - hostname: master-0
+  - hostname: vm-00
     interfaces:
-      - name: eno1
-        macAddress: 00:ef:44:21:e6:a5
+      - name: enp1s0
+        macAddress: 52:54:00:4e:ff:10
     rootDeviceHints:
-      deviceName: /dev/sdb
+      deviceName: /dev/sda
     networkConfig:
       interfaces:
-        - name: eno1
+        - name: enp1s0
           type: ethernet
           state: up
-          mac-address: 00:ef:44:21:e6:a5
+          mac-address: 52:54:00:4e:ff:10
           ipv4:
             enabled: true
             address:
-              - ip: 192.168.111.80
+              - ip: 10.3.0.101
                 prefix-length: 23
             dhcp: false
       dns-resolver:
         config:
           server:
-            - 192.168.111.1
+            - 10.3.0.1
       routes:
         config:
           - destination: 0.0.0.0/0
-            next-hop-address: 192.168.111.2
-            next-hop-interface: eno1
+            next-hop-address: 10.3.0.2
+            next-hop-interface: enp1s0
             table-id: 254
