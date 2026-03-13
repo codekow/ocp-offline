@@ -52,6 +52,7 @@ download_files(){
   tar vzxf ../mirror-registry*.tar.gz
   cd ..
 
+  # verify cli in path
   which oc openshift-install oc-mirror
 }
 
