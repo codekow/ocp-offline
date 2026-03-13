@@ -24,7 +24,12 @@ networking:
 platform:
   none: {}
 pullSecret: '{"auths": {"bootstrap-00:8443": {"auth": "aW5pdDphbG9uZ3Bhc3N3b3Jk"}}}'
-sshKey: ''
+sshKey: |
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKk5DMDFPmpzto9s5Nk1FeqrPYNttJnvW6FCWUGrbLFo cory@keepass
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbbtKs6P4wpUbZxIJcEa0t0Hw0x6Tv/Ml1/J7fMRqlQ cory@kowbuntu
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZCclaNu304ostULU/oHr1C25LALS4+nFSFDwO5F7EZ cory@pinky
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFybml+CZeJma57fvjnUKUwuSEn0JZRpa9/SAlu4t/Ct cory@skeldora
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBVozIG+urkwIt9isbxcg+Eqjw/9FvzRK2pfZ59CPgwh cory@kowdora
 # !! Deprecated - might be a lie - trust the docs !!
 # imageContentSources:
 imageDigestSources:
