@@ -23,35 +23,12 @@
 mkdir ocp-install
 cd ocp-install
 
-# ocp mirror
-# https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/
-OCP_VER=4.20.15
-
-# get oc
-wget https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/${OCP_VER}/openshift-client-linux-${OCP_VER}.tar.gz
-tar vzxf openshift-client-*.tar.gz
-mv oc kubectl ~/bin
-
-# get oc-mirror
-wget https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/${OCP_VER}/oc-mirror.tar.gz
-tar vzxf oc-mirror*.tar.gz
-chmod +x oc-mirror
-mv oc-mirror ~/bin
+# setup functions
+. scripts/functions.sh
 
 # setup autocomplete
 . <(oc completion bash)
 . <(oc-mirror --v2 completion bash)
-```
-
-```sh
-# get mirror-registry
-wget https://mirror.openshift.com/pub/cgw/mirror-registry/latest/mirror-registry-amd64.tar.gz
-
-mkdir registry
-cd registry
-
-tar vzxf ../mirror-registry*.tar.gz
-mv mirror-registry ~/bin
 ```
 
 ```sh
@@ -60,12 +37,8 @@ podman login $(hostname):8443
 ```
 
 ```sh
-REG_PATH=/srv/registry
-
-
-
 # combine pull-secret
-jq -s '.[0] * .[1]' pull-secret.txt ${XDG_RUNTIME_DIR}/containers/auth.json > merged.json
+jq -s '.[0] * .[1]' pull-secret.txt ${XDG_RUNTIME_DIR}/containers/auth.json > merged-auth.json
 
 # update CA trust
 cp ${REG_PATH}/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchors/quay.pem

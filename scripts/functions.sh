@@ -1,7 +1,37 @@
-#!/bin/sh                    
-                                    
+#!/bin/bash
+
+download_files(){
+  OCP_VER=${1:-4.20.15}
+
+  [ -e ~/bin ] || mkdir -p ~/bin
+  [ -e tmp ] || mkdir tmp
+
+  # ocp mirror
+  # https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/
+
+  # get oc
+  wget -c -nc https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/${OCP_VER}/openshift-client-linux-${OCP_VER}.tar.gz
+  tar vzxf openshift-client-*.tar.gz
+  mv oc kubectl ~/bin
+
+  # get oc-mirror
+  wget -c -nc https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/${OCP_VER}/oc-mirror.tar.gz
+  tar vzxf oc-mirror*.tar.gz
+  chmod +x oc-mirror
+  mv oc-mirror ~/bin
+
+  # get mirror-registry
+  wget -c -nc https://mirror.openshift.com/pub/cgw/mirror-registry/latest/mirror-registry-amd64.tar.gz
+
+  mkdir registry
+  cd registry
+
+  tar vzxf ../mirror-registry*.tar.gz
+  cd ..
+}
+
 oc_mirror_src2files(){
-                                    
+
 TMPDIR=${PWD}/tmp \
   oc-mirror --v2 \
     -c ${PWD}/isc.yaml \
@@ -38,6 +68,9 @@ TMPDIR=${PWD}/tmp \
 }
 
 mirror_registry_install(){
+
+  [ -x mirror-registry ] || return 0
+
   REG_PATH=/srv/registry
   REG_USER=init
   REG_PASS=alongpassword
@@ -47,13 +80,26 @@ mirror_registry_install(){
   ./mirror-registry install \
     --initUser "${REG_USER}" \
     --initPassword "${REG_PASS}" \
-    --sqliteStorage ${REG_PATH}/db \ 
+    --sqliteStorage ${REG_PATH}/db \
     --quayRoot ${REG_PATH}/config \
     --quayStorage ${REG_PATH}/data
+
+  # update CA trust
+  cat ${REG_PATH}/quay-rootCA/rootCA.pem | sudo tee /etc/pki/ca-trust/source/anchors/quay.pem
+  sudo update-ca-trust extract
+
+  # open firewall (optional)
+  sudo firewall-cmd --add-port=8443/tcp --permanent
+  sudo firewall-cmd --reload
 }
 
 mirror_registry_uninstall(){
+  [ -x mirror-registry ] || return 0
+
   ./mirror-registry uninstall
+
+  sudo firewall-cmd --remove-port=8443/tcp --permanent
+  sudo firewall-cmd --reload
 }
 
 pull_secret_merge_with_mirror(){
