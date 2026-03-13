@@ -134,6 +134,7 @@ mirror_registry_uninstall(){
 pull_secret_merge_with_mirror(){
   [ -e pull-secret.txt ] || return 0
   [ -e ${XDG_RUNTIME_DIR}/containers/auth.json ] || return 0
+  which jq || return 0
 
   jq -s '.[0] * .[1]' pull-secret.txt ${XDG_RUNTIME_DIR}/containers/auth.json > pull-combo.json
 
