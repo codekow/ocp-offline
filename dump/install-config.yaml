@@ -1,4 +1,4 @@
-arbiter apiVersion: v1
+apiVersion: v1
 baseDomain: chaos.lab
 metadata:
   name: ocp1

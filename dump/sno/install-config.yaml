@@ -1,4 +1,4 @@
-arbiter apiVersion: v1
+apiVersion: v1
 baseDomain: chaos.lab
 metadata:
   name: sno
@@ -23,8 +23,8 @@ networking:
   - 172.30.0.0/16
 platform:
   none: {}
-pullSecret: '<pull_secret>'
-sshKey: '<ssh_pub_key>'
+pullSecret: ''
+sshKey: ''
 imageDigestSources:
   - mirrors:
     - bootstrap-00:8443/redhat/openshift/release
