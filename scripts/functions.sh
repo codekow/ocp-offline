@@ -1,7 +1,7 @@
 #!/bin/bash
 
 download_files(){
-  SCRATCH=${1:-${PWD}/scratch}
+  SCRATCH=${1:-${PWD}}
   OCP_VER=${2:-4.20.15}
 
   [ -e ~/bin ] || mkdir -p ~/bin
