@@ -40,6 +40,8 @@ download_files
 
 ```sh
 # !! IMPORTANT !! - these versions should match
+# openshift-install needs to match the version(s) in the isc.yaml (oc-mirror)
+
 oc version
 openshift-install version
 

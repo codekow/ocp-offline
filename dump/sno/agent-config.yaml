@@ -23,7 +23,7 @@ hosts:
             enabled: true
             address:
               - ip: 10.3.0.107
-                prefix-length: 23
+                prefix-length: 24
             dhcp: false
       dns-resolver:
         config:

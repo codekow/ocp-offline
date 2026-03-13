@@ -32,11 +32,11 @@ platform:
     - 10.3.0.121
     ingressVIPs:
     - 10.3.0.122
-pullSecret: '<pull_secret>'
-sshKey: '<ssh_pub_key>'
-# imageDigestSources:
-# !! Deprecated might be a lie - trust the docs !!
-imageContentSources:
+pullSecret: ''
+sshKey: ''
+# !! Deprecated - might be a lie - trust the docs !!
+# imageContentSources:
+imageDigestSources:
   - mirrors:
     - bootstrap-00:8443/redhat/openshift/release
     source: quay.io/openshift-release-dev/ocp-v4.0-art-dev

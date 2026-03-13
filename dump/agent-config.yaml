@@ -23,7 +23,63 @@ hosts:
             enabled: true
             address:
               - ip: 10.3.0.101
-                prefix-length: 23
+                prefix-length: 24
+            dhcp: false
+      dns-resolver:
+        config:
+          server:
+            - 10.3.0.1
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: 10.3.0.1
+            next-hop-interface: enp1s0
+            table-id: 254
+  - hostname: vm-01
+    interfaces:
+      - name: enp1s0
+        macAddress: 52:54:00:4e:ff:12
+    rootDeviceHints:
+      deviceName: /dev/sda
+    networkConfig:
+      interfaces:
+        - name: enp1s0
+          type: ethernet
+          state: up
+          mac-address: 52:54:00:4e:ff:12
+          ipv4:
+            enabled: true
+            address:
+              - ip: 10.3.0.102
+                prefix-length: 24
+            dhcp: false
+      dns-resolver:
+        config:
+          server:
+            - 10.3.0.1
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: 10.3.0.1
+            next-hop-interface: enp1s0
+            table-id: 254
+  - hostname: vm-02
+    interfaces:
+      - name: enp1s0
+        macAddress: 52:54:00:4e:ff:14
+    rootDeviceHints:
+      deviceName: /dev/sda
+    networkConfig:
+      interfaces:
+        - name: enp1s0
+          type: ethernet
+          state: up
+          mac-address: 52:54:00:4e:ff:14
+          ipv4:
+            enabled: true
+            address:
+              - ip: 10.3.0.103
+                prefix-length: 24
             dhcp: false
       dns-resolver:
         config:
