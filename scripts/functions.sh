@@ -141,7 +141,9 @@ pull_secret_merge_with_mirror(){
 
 extract_ocp_install(){
   # https://access.redhat.com/solutions/7062500
-  echo "DO NOT USE..."
+  echo "
+    This openshift-install will not work correctly w/ agent create image...
+  "
 
   echo '
   oc adm release extract \
