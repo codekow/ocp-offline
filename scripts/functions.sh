@@ -1,10 +1,8 @@
 #!/bin/bash
 
-SCRATCH=${PWD}/scratch
-
 download_files(){
-  SCRATCH=${SCRATCH:-${PWD}/scratch}
-  OCP_VER=${1:-4.20.15}
+  SCRATCH=${1:-${PWD}/scratch}
+  OCP_VER=${2:-4.20.15}
 
   [ -e ~/bin ] || mkdir -p ~/bin
 
@@ -30,8 +28,8 @@ download_files(){
   # get mirror-registry
   wget -c -nc https://mirror.openshift.com/pub/cgw/mirror-registry/latest/mirror-registry-amd64.tar.gz
 
-  mkdir registry
-  cd registry
+  mkdir quay
+  cd quay
 
   tar vzxf ../mirror-registry*.tar.gz
   cd ..
@@ -95,7 +93,7 @@ mirror_registry_install(){
     --quayStorage ${REG_PATH}/data
 
   # update CA trust
-  cat ${REG_PATH}/quay-rootCA/rootCA.pem | sudo tee /etc/pki/ca-trust/source/anchors/quay.pem
+  cat ${REG_PATH}/config/quay-rootCA/rootCA.pem | sudo tee /etc/pki/ca-trust/source/anchors/quay.pem
   sudo update-ca-trust extract
 
   # open firewall (optional)

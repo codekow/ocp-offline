@@ -36,16 +36,18 @@ download_files
 ```
 
 ```sh
-# login to mirror registry
-podman login $(hostname):8443
-```
-
-```sh
 # oc_mirror_src2files
 # oc_mirror_files2mirror
 
-mirror_registry_install
+# install mirror-registry
+cd scratch/mirror-registry
+mirror_registry_install /srv/registry
+cd ..
 
 oc_mirror_src2mirror
+```
 
+```sh
+# login to mirror registry
+podman login $(hostname):8443
 ```
