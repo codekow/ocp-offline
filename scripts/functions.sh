@@ -1,9 +1,14 @@
 #!/bin/bash
 
 download_files(){
+  SCRATCH=${PWD}/scratch
   OCP_VER=${1:-4.20.15}
 
   [ -e ~/bin ] || mkdir -p ~/bin
+
+  [ -e "${SCRATCH}" ] || mkdir -p "${SCRATCH}"
+
+  cd ${SCRATCH}
   [ -e tmp ] || mkdir tmp
 
   # ocp mirror
@@ -32,37 +37,40 @@ download_files(){
 
 oc_mirror_src2files(){
 
-TMPDIR=${PWD}/tmp \
+TMPDIR=${SCRATCH} \
   oc-mirror --v2 \
-    -c ${PWD}/isc.yaml \
-    --cache-dir ${PWD}/cache \
-    --authfile ${PWD}/pull-secret.txt \
+    -c ${SCRATCH}/isc.yaml \
+    --cache-dir ${SCRATCH}/cache \
+    --authfile ${SCRATCH}/pull-secret.txt \
     --image-timeout 60m \
-      file://${PWD}/files
+      file://${SCRATCH}/files
 }
 
 oc_mirror_files2mirror(){
 
-TMPDIR=${PWD}/tmp \
+  pull_secret_merge_with_mirror
+
+  TMPDIR=${SCRATCH} \
   oc-mirror --v2 \
-    -c ${PWD}/isc.yaml \
-    --cache-dir ${PWD}/cache \
+    -c ${SCRATCH}/isc.yaml \
     --dest-tls-verify=false \
-    --authfile ${PWD}/merged-auth.json \
+    --authfile ${SCRATCH}/merged-auth.json \
     --image-timeout 60m \
-    --from file://${PWD}/files \
+    --from file://${SCRATCH}/files \
       docker://$(hostname):8443/redhat
 }
 
 oc_mirror_src2mirror(){
 
-TMPDIR=${PWD}/tmp \
+  pull_secret_merge_with_mirror
+
+  TMPDIR=${SCRATCH} \
   oc-mirror --v2 \
-    -c ${PWD}/isc.yaml \
-    --cache-dir ${PWD}/cache \
+    -c ${SCRATCH}/isc.yaml \
+    --cache-dir ${SCRATCH}/cache \
     --dest-tls-verify=false \
-    --workspace file://${PWD}/workspace \
-    --authfile ${PWD}/pull-secret.txt \
+    --workspace file://${SCRATCH}/workspace \
+    --authfile ${SCRATCH}/merged-auth.json \
     --image-timeout 60m \
       docker://$(hostname):8443/redhat
 }
