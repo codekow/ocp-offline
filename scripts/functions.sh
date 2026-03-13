@@ -53,7 +53,10 @@ download_files(){
   cd ..
 
   # verify cli in path
-  which oc openshift-install oc-mirror
+  which oc && oc version 
+  which openshift-install && openshift-install version
+  which oc-mirror
+
 }
 
 oc_mirror_src2files(){
