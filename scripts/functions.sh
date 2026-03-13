@@ -130,5 +130,5 @@ extract_ocp_tools(){
   oc adm release extract \
     -a merged-auth.json \
     --command=openshift-install \
-    "$(hostname):8443/openshift/release-images:${OCP_VER:-4.20.15}-x86_64"
+    "$(hostname):8443/redhat/openshift/release-images:${OCP_VER:-4.20.15}-x86_64"
 }
