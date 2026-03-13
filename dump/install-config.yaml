@@ -1,0 +1,62 @@
+apiVersion: v1
+baseDomain: chaos.lab
+metadata:
+  name: ocp1
+# arbiter:
+#   architecture: amd64
+#   hyperthreading: Enabled
+#   replicas: 1 
+#   name: arbiter 
+#   platform:
+#     baremetal: {}
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  replicas: 0
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  replicas: 1
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.3.0.0/24
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  baremetal:
+    apiVIPs:
+    - 10.3.0.121
+    ingressVIPs:
+    - 10.3.0.122
+pullSecret: '<pull_secret>'
+sshKey: '<ssh_pub_key>'
+additionalTrustBundle: |
+  -----BEGIN CERTIFICATE-----
+  MIIDyjCCArKgAwIBAgIUANUWaiyUIlbD6Ky2pGmtKnL4tVowDQYJKoZIhvcNAQEL
+  BQAwZjELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAlZBMREwDwYDVQQHDAhOZXcgWW9y
+  azENMAsGA1UECgwEUXVheTERMA8GA1UECwwIRGl2aXNpb24xFTATBgNVBAMMDGJv
+  b3RzdHJhcC0wMDAeFw0yNjAzMTMwMjAxMzRaFw0yODEyMzEwMjAxMzRaMGYxCzAJ
+  BgNVBAYTAlVTMQswCQYDVQQIDAJWQTERMA8GA1UEBwwITmV3IFlvcmsxDTALBgNV
+  BAoMBFF1YXkxETAPBgNVBAsMCERpdmlzaW9uMRUwEwYDVQQDDAxib290c3RyYXAt
+  MDAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDMOxjuEBqs/3VCh4XP
+  ioRLso+pVcLSyR9Wmf5doR9F3rj/4ywdyH3ckK1V8pU4v//7JPWfWZN6cOecXA4S
+  9DRw0/e03jnzdAv4AdXgik1+ayTvs9vz8aLJDKZzBDZXPHai28I5LunR7X8/TaK3
+  qmvSSCEc/hfoJnv/KPCkD3GMmUR2eTwdzxkviKHS85/532CcspOBvI/i2gyWTHaD
+  FBjYBmKA3rqXUt6CI9+TeNtXMUqdG+S5ROutSl0BRx3XaZx/k8W2ZHUCPFKmJFZP
+  40RJOjhX+B/Kb9WctYlLS0UOrDyFUai6OsjZEtWtAGUUSpNuIB3N/YN4rSml+y/1
+  IGhnAgMBAAGjcDBuMAsGA1UdDwQEAwIC5DATBgNVHSUEDDAKBggrBgEFBQcDATAX
+  BgNVHREEEDAOggxib290c3RyYXAtMDAwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNV
+  HQ4EFgQU35wFaaQVUNcxM7ZlyAbXO0CyySwwDQYJKoZIhvcNAQELBQADggEBAGA/
+  lWRuZ8NiklxKnT2A79NvtmNsSpt30Ktfpg0FFTfwleP2/M7UIRn6iHDs9dh7fKTo
+  oqwqgYEAMrt6OwTQMDG7/HTDPyrTcAFMBBfBaxByW0KP/32xXF45As7qOjnwSGly
+  S1AvYBwbGdiOmwwq/sbvhESc/p6F89R3DctzKzWuRTfELPtuxHtL9/FHAmCO9uIQ
+  SkFCTo8RKI4M+eXcvgkyPrw5IxdT0pGZ6q4lKcNHOG0W+oCRfIOEIJJao2qU4iWM
+  J1ylkEfzL0vb866OXc5RrU2s/SYr/RR+6+HABTuHDqb0rqoph/E30dwarqPHciyk
+  it58b3x15YZlmDKiOcc=
+  -----END CERTIFICATE-----
