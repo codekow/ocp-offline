@@ -37,8 +37,9 @@ download_files(){
 }
 
 oc_mirror_src2files(){
+  SCRATCH=${SCRATCH:-${PWD}}
 
-  TMPDIR=${SCRATCH:-${PWD}} \
+  TMPDIR=${SCRATCH} \
   oc-mirror --v2 \
     -c ${SCRATCH}/isc.yaml \
     --cache-dir ${SCRATCH}/cache \
@@ -48,10 +49,11 @@ oc_mirror_src2files(){
 }
 
 oc_mirror_files2mirror(){
+  SCRATCH=${SCRATCH:-${PWD}}
 
   pull_secret_merge_with_mirror
 
-  TMPDIR=${SCRATCH:-${PWD}} \
+  TMPDIR=${SCRATCH} \
   oc-mirror --v2 \
     -c ${SCRATCH}/isc.yaml \
     --dest-tls-verify=false \
@@ -62,10 +64,11 @@ oc_mirror_files2mirror(){
 }
 
 oc_mirror_src2mirror(){
+  SCRATCH=${SCRATCH:-${PWD}}
 
   pull_secret_merge_with_mirror
 
-  TMPDIR=${SCRATCH:-${PWD}} \
+  TMPDIR=${SCRATCH} \
   oc-mirror --v2 \
     -c ${SCRATCH}/isc.yaml \
     --cache-dir ${SCRATCH}/cache \
