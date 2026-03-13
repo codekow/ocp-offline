@@ -80,8 +80,8 @@ mirror_registry_install(){
   [ -x mirror-registry ] || return 0
 
   REG_PATH=${1:-${PWD}}
-  REG_USER=init
-  REG_PASS=alongpassword
+  REG_USER=${2:-init}
+  REG_PASS=${3:-alongpassword}
 
   mkdir -p ${REG_PATH}/{config,data,db}
 
@@ -99,6 +99,8 @@ mirror_registry_install(){
   # open firewall (optional)
   sudo firewall-cmd --add-port=8443/tcp --permanent
   sudo firewall-cmd --reload
+
+  podman login $(hostname):8443 -u "${REG_USER}" -p "${REG_PASS}"
 }
 
 mirror_registry_uninstall(){
