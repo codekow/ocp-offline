@@ -29,11 +29,12 @@ networking:
   serviceNetwork:
   - 172.30.0.0/16
 platform:
-  baremetal:
-    apiVIPs:
-    - 10.3.0.121
-    ingressVIPs:
-    - 10.3.0.122
+  none: {}
+  # baremetal:
+  #   apiVIPs:
+  #   - 10.3.0.121
+  #   ingressVIPs:
+  #   - 10.3.0.122
 pullSecret: '<pull_secret>'
 sshKey: '<ssh_pub_key>'
 additionalTrustBundle: |
