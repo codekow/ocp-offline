@@ -1,5 +1,9 @@
 #!/bin/bash
 
+check_prereqs(){
+  which nmstatectl || sudo dnf install /usr/bin/nmstatectl -y
+}
+
 download_files(){
   SCRATCH=${1:-${PWD}}
   OCP_VER=${2:-4.20.15}
