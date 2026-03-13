@@ -70,7 +70,7 @@ oc_mirror_files2mirror(){
   oc-mirror --v2 \
     -c ${SCRATCH}/isc.yaml \
     --dest-tls-verify=false \
-    --authfile ${SCRATCH}/pull-secret.json \
+    --authfile ${SCRATCH}/pull-combo.json \
     --image-timeout 60m \
     --from file://${SCRATCH}/files \
       docker://$(hostname):8443/redhat
@@ -86,7 +86,7 @@ oc_mirror_src2mirror(){
     -c ${SCRATCH}/isc.yaml \
     --dest-tls-verify=false \
     --workspace file://${SCRATCH}/workspace \
-    --authfile ${SCRATCH}/pull-secret.json \
+    --authfile ${SCRATCH}/pull-combo.json \
     --image-timeout 60m \
       docker://$(hostname):8443/redhat
 }
@@ -135,10 +135,10 @@ pull_secret_merge_with_mirror(){
   [ -e pull-secret.txt ] || return 0
   [ -e ${XDG_RUNTIME_DIR}/containers/auth.json ] || return 0
 
-  jq -s '.[0] * .[1]' pull-secret.txt ${XDG_RUNTIME_DIR}/containers/auth.json > pull-secret.json
+  jq -s '.[0] * .[1]' pull-secret.txt ${XDG_RUNTIME_DIR}/containers/auth.json > pull-combo.json
 
   [ -e auth.json ] || mv ${XDG_RUNTIME_DIR}/containers/auth.json auth.json
-  cp pull-secret.json ${XDG_RUNTIME_DIR}/containers/auth.json
+  cp pull-combo.json ${XDG_RUNTIME_DIR}/containers/auth.json
 }
 
 extract_ocp_install(){
@@ -149,7 +149,7 @@ extract_ocp_install(){
 
   echo '
   oc adm release extract \
-    -a pull-secret.json \
+    -a pull-combo.json \
     --command=openshift-install \
     "$(hostname):8443/redhat/openshift/release-images:${OCP_VER:-4.20.15}-x86_64"
   '
@@ -157,7 +157,7 @@ extract_ocp_install(){
 
 extract_iso(){
   oc image extract \
-    -a pull-secret.json \
+    -a pull-combo.json \
     --path=/coreos/coreos-x86_64.iso:${HOME}/.cache/agent/image_cache \
     --filter-by-os=linux/amd64 \
     --confirm \
