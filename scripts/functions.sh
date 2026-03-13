@@ -28,6 +28,7 @@ download_files(){
   # get mirror-registry
   wget -c -nc https://mirror.openshift.com/pub/cgw/mirror-registry/latest/mirror-registry-amd64.tar.gz
 
+  # unpack mirror-registry files in dir
   [ -e quay ] || mkdir quay
   cd quay
 
@@ -37,7 +38,7 @@ download_files(){
 
 oc_mirror_src2files(){
 
-TMPDIR=${SCRATCH} \
+  TMPDIR=${SCRATCH:-${PWD}} \
   oc-mirror --v2 \
     -c ${SCRATCH}/isc.yaml \
     --cache-dir ${SCRATCH}/cache \
@@ -50,7 +51,7 @@ oc_mirror_files2mirror(){
 
   pull_secret_merge_with_mirror
 
-  TMPDIR=${SCRATCH} \
+  TMPDIR=${SCRATCH:-${PWD}} \
   oc-mirror --v2 \
     -c ${SCRATCH}/isc.yaml \
     --dest-tls-verify=false \
@@ -64,7 +65,7 @@ oc_mirror_src2mirror(){
 
   pull_secret_merge_with_mirror
 
-  TMPDIR=${SCRATCH} \
+  TMPDIR=${SCRATCH:-${PWD}} \
   oc-mirror --v2 \
     -c ${SCRATCH}/isc.yaml \
     --cache-dir ${SCRATCH}/cache \
