@@ -28,7 +28,7 @@ download_files(){
   # get mirror-registry
   wget -c -nc https://mirror.openshift.com/pub/cgw/mirror-registry/latest/mirror-registry-amd64.tar.gz
 
-  mkdir quay
+  [ -e quay ] || mkdir quay
   cd quay
 
   tar vzxf ../mirror-registry*.tar.gz
