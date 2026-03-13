@@ -141,6 +141,7 @@ pull_secret_merge_with_mirror(){
 
 extract_ocp_install(){
   # https://access.redhat.com/solutions/7062500
+  echo "do not use..." && return 0
 
   oc adm release extract \
     -a merged-auth.json \
