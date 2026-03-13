@@ -141,12 +141,14 @@ pull_secret_merge_with_mirror(){
 
 extract_ocp_install(){
   # https://access.redhat.com/solutions/7062500
-  echo "do not use..." && return 0
+  echo "DO NOT USE..."
 
+  echo '
   oc adm release extract \
     -a merged-auth.json \
     --command=openshift-install \
     "$(hostname):8443/redhat/openshift/release-images:${OCP_VER:-4.20.15}-x86_64"
+  '
 }
 
 extract_iso(){
