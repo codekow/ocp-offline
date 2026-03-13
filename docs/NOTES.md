@@ -9,7 +9,8 @@
 - https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html-single/disconnected_environments/index#installing-mirroring-creating-registry
 - https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html-single/disconnected_environments/index#prerequisites_installing-mirroring-creating-registry
 - https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html-single/disconnected_environments/index#oc-mirror-workflows-partially-disconnected-v2_about-installing-oc-mirror-v2
-
+- [Single ISO Download](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html-single/installing_an_on-premise_cluster_with_the_agent-based_installer/index#virt-installing-ove-iso_installing-ove)
+  - [x] I’m installing on a disconnected/air-gapped/secured environment
 ## Commands
 
 ```sh
