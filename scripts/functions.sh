@@ -22,19 +22,19 @@ download_files(){
   # get oc
   wget -c -nc https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/${OCP_VER}/openshift-client-linux-${OCP_VER}.tar.gz
   tar vzxf openshift-client-*.tar.gz
-  [ -e README.md ] && cat README.md
+  [ -e README.md ] && (cat README.md; rm README.md)
   mv oc kubectl ~/bin
 
   # get openshift-install
   wget -c -nc https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OCP_VER}/openshift-install-linux.tar.gz
   tar vzxf openshift-install-*.tar.gz
-  [ -e README.md ] && cat README.md
+  [ -e README.md ] && (cat README.md; rm README.md)
   mv openshift-install ~/bin
 
   # get oc-mirror
   wget -c -nc https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/${OCP_VER}/oc-mirror.tar.gz
   tar vzxf oc-mirror*.tar.gz
-  [ -e README.md ] && cat README.md
+  [ -e README.md ] && (cat README.md; rm README.md)
   chmod +x oc-mirror
   mv oc-mirror ~/bin
 
