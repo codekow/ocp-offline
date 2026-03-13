@@ -125,3 +125,10 @@ pull_secret_merge_with_mirror(){
 
   jq -s '.[0] * .[1]' pull-secret.txt ${XDG_RUNTIME_DIR}/containers/auth.json > merged-auth.json
 }
+
+extract_ocp_tools(){
+  oc adm release extract \
+    -a merged-auth.json \
+    --command=openshift-install \
+    "$(hostname):8443/openshift/release-images:${OCP_VER:-4.20.15}-x86_64"
+}
