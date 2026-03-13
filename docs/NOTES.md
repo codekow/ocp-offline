@@ -39,7 +39,12 @@ download_files
 ```
 
 ```sh
+# !! IMPORTANT !! - these versions should match
+oc version
+openshift-install version
+
 # setup autocomplete
+. <(openshift-install completion bash)
 . <(oc completion bash)
 . <(oc-mirror --v2 completion bash)
 ```
