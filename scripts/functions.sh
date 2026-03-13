@@ -106,10 +106,14 @@ mirror_registry_install(){
 mirror_registry_uninstall(){
   [ -x mirror-registry ] || return 0
 
-  ./mirror-registry uninstall
+  sudo rm /etc/pki/ca-trust/source/anchors/quay.pem
+  sudo update-ca-trust extract
 
   sudo firewall-cmd --remove-port=8443/tcp --permanent
   sudo firewall-cmd --reload
+
+  ./mirror-registry uninstall
+
 }
 
 pull_secret_merge_with_mirror(){
