@@ -155,7 +155,7 @@ extract_ocp_install(){
 
 extract_iso(){
   oc image extract \
-    --path=/coreos/coreos-x86_64.iso:~/.cache/agent/image_cache \
+    --path=/coreos/coreos-x86_64.iso:${HOME}/.cache/agent/image_cache \
     --filter-by-os=linux/amd64 \
     --confirm \
     quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f93e0978db7e4a065b8722d023bcf9d7e0dbe3cd1e78d83a190c168f205147fe
