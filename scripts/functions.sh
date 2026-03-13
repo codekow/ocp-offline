@@ -22,16 +22,19 @@ download_files(){
   # get oc
   wget -c -nc https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/${OCP_VER}/openshift-client-linux-${OCP_VER}.tar.gz
   tar vzxf openshift-client-*.tar.gz
+  [ -e README.md ] && cat README.md
   mv oc kubectl ~/bin
 
   # get openshift-install
   wget -c -nc https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OCP_VER}/openshift-install-linux.tar.gz
   tar vzxf openshift-install-*.tar.gz
+  [ -e README.md ] && cat README.md
   mv openshift-install ~/bin
 
   # get oc-mirror
   wget -c -nc https://mirror.openshift.com/pub/openshift-v4/amd64/clients/ocp/${OCP_VER}/oc-mirror.tar.gz
   tar vzxf oc-mirror*.tar.gz
+  [ -e README.md ] && cat README.md
   chmod +x oc-mirror
   mv oc-mirror ~/bin
 
@@ -136,11 +139,19 @@ pull_secret_merge_with_mirror(){
   jq -s '.[0] * .[1]' pull-secret.txt ${XDG_RUNTIME_DIR}/containers/auth.json > merged-auth.json
 }
 
-extract_ocp_tools(){
+extract_ocp_install(){
   # https://access.redhat.com/solutions/7062500
 
   oc adm release extract \
     -a merged-auth.json \
     --command=openshift-install \
     "$(hostname):8443/redhat/openshift/release-images:${OCP_VER:-4.20.15}-x86_64"
+}
+
+extract_iso(){
+  oc image extract \
+    --path=/coreos/coreos-x86_64.iso:~/.cache/agent/image_cache \
+    --filter-by-os=linux/amd64 \
+    --confirm \
+    quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f93e0978db7e4a065b8722d023bcf9d7e0dbe3cd1e78d83a190c168f205147fe
 }
