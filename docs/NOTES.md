@@ -13,6 +13,8 @@
 ## Commands
 
 ```sh
+sudo dnf install /usr/bin/nmstatectl -y
+
 # create pull-secret
 # https://console.redhat.com/openshift/downloads#tool-pull-secret
 # !! MANUAL !!

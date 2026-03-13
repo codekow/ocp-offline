@@ -37,6 +37,13 @@ platform:
   #   - 10.3.0.122
 pullSecret: '<pull_secret>'
 sshKey: '<ssh_pub_key>'
+imageContentSources:
+  - mirrors:
+    - bootstrap-00:8443/redhat/openshift/release
+    source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+  - mirrors:
+    - bootstrap-00:8443/redhat/openshift/release-images
+    source: quay.io/openshift-release-dev/ocp-release
 additionalTrustBundle: |
   -----BEGIN CERTIFICATE-----
   MIIDyjCCArKgAwIBAgIUANUWaiyUIlbD6Ky2pGmtKnL4tVowDQYJKoZIhvcNAQEL

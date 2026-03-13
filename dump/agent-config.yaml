@@ -2,6 +2,9 @@ apiVersion: v1beta1
 kind: AgentConfig
 metadata:
   name: sno
+additionalNTPSources:
+- time1.google.com
+- time2.google.com
 rendezvousIP: 10.3.0.101
 hosts:
   - hostname: vm-00
@@ -29,6 +32,6 @@ hosts:
       routes:
         config:
           - destination: 0.0.0.0/0
-            next-hop-address: 10.3.0.2
+            next-hop-address: 10.3.0.1
             next-hop-interface: enp1s0
             table-id: 254
