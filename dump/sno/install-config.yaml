@@ -1,12 +1,7 @@
 arbiter apiVersion: v1
 baseDomain: chaos.lab
 metadata:
-  name: ocp1
-# arbiter:
-#   architecture: amd64
-#   hyperthreading: Enabled
-#   replicas: 1
-#   name: arbiter
+  name: sno
 compute:
 - architecture: amd64
   hyperthreading: Enabled
@@ -16,7 +11,7 @@ controlPlane:
   architecture: amd64
   hyperthreading: Enabled
   name: master
-  replicas: 3
+  replicas: 1
 networking:
   clusterNetwork:
   - cidr: 10.128.0.0/14
@@ -27,11 +22,7 @@ networking:
   serviceNetwork:
   - 172.30.0.0/16
 platform:
-  baremetal:
-    apiVIPs:
-    - 10.3.0.121
-    ingressVIPs:
-    - 10.3.0.122
+  none: {}
 pullSecret: '<pull_secret>'
 sshKey: '<ssh_pub_key>'
 imageDigestSources:

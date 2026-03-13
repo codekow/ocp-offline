@@ -3,14 +3,14 @@ kind: AgentConfig
 metadata:
   name: sno
 additionalNTPSources:
-  - 0.pool.ntp.org
-  - 1.pool.ntp.org
-rendezvousIP: 10.3.0.101
+  - pool.ntp.org
+  - pool.ntp.org
+rendezvousIP: 10.3.0.107
 hosts:
-  - hostname: vm-00
+  - hostname: sno
     interfaces:
       - name: enp1s0
-        macAddress: 52:54:00:4e:ff:10
+        macAddress: 52:54:00:4e:ff:22
     rootDeviceHints:
       deviceName: /dev/sda
     networkConfig:
@@ -18,11 +18,11 @@ hosts:
         - name: enp1s0
           type: ethernet
           state: up
-          mac-address: 52:54:00:4e:ff:10
+          mac-address: 52:54:00:4e:ff:22
           ipv4:
             enabled: true
             address:
-              - ip: 10.3.0.101
+              - ip: 10.3.0.107
                 prefix-length: 23
             dhcp: false
       dns-resolver:
