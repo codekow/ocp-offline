@@ -84,7 +84,6 @@ oc_mirror_src2mirror(){
   TMPDIR=${SCRATCH} \
   oc-mirror --v2 \
     -c ${SCRATCH}/isc.yaml \
-    --cache-dir ${SCRATCH}/cache \
     --dest-tls-verify=false \
     --workspace file://${SCRATCH}/workspace \
     --authfile ${SCRATCH}/pull-secret.json \

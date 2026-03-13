@@ -34,6 +34,8 @@ platform:
     - 10.3.0.122
 pullSecret: '<pull_secret>'
 sshKey: '<ssh_pub_key>'
+# imageContentSources:
+# !! Deprecated !!
 imageDigestSources:
   - mirrors:
     - bootstrap-00:8443/redhat/openshift/release
