@@ -26,8 +26,8 @@ networking:
   networkType: OVNKubernetes
   serviceNetwork:
   - 172.30.0.0/16
-bootstrapInPlace:
-  installationDisk: /dev/sda
+# bootstrapInPlace:
+#   installationDisk: /dev/sda
 platform:
   baremetal:
     externalBridge: br0
