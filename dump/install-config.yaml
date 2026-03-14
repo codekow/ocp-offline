@@ -27,9 +27,10 @@ networking:
   serviceNetwork:
   - 172.30.0.0/16
 platform:
+bootstrapInPlace:
   baremetal:
     externalBridge: br0
-    provisioningBridge: none
+    provisioningBridge: {}
     apiVIPs:
     - 10.3.0.121
     ingressVIPs:
