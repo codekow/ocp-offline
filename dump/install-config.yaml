@@ -29,6 +29,7 @@ networking:
 platform:
   baremetal:
     externalBridge: br0
+    provisioningBridge: none
     apiVIPs:
     - 10.3.0.121
     ingressVIPs:
