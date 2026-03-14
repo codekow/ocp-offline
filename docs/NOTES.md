@@ -69,3 +69,7 @@ oc_mirror_src2mirror
 # login to mirror registry
 podman login $(hostname):8443
 ```
+
+## Additional Links
+
+- https://github.com/mariocr73/OCP-ABI-BAREMETAL
