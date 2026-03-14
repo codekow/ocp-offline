@@ -1,7 +1,12 @@
 apiVersion: v1
 baseDomain: chaos.lab
 metadata:
-  name: sno
+  name: ocp1
+# arbiter:
+#   architecture: amd64
+#   hyperthreading: Enabled
+#   replicas: 1
+#   name: arbiter
 compute:
 - architecture: amd64
   hyperthreading: Enabled
@@ -11,7 +16,7 @@ controlPlane:
   architecture: amd64
   hyperthreading: Enabled
   name: master
-  replicas: 1
+  replicas: 3
 networking:
   clusterNetwork:
   - cidr: 10.128.0.0/14
@@ -22,7 +27,11 @@ networking:
   serviceNetwork:
   - 172.30.0.0/16
 platform:
-  none: {}
+  baremetal:
+    apiVIPs:
+    - 10.3.0.121
+    ingressVIPs:
+    - 10.3.0.122
 pullSecret: '{"auths": {"bootstrap-00:8443": {"auth": "aW5pdDphbG9uZ3Bhc3N3b3Jk"}}}'
 sshKey: |
   ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKk5DMDFPmpzto9s5Nk1FeqrPYNttJnvW6FCWUGrbLFo cory@keepass
@@ -63,3 +72,4 @@ additionalTrustBundle: |
   J1ylkEfzL0vb866OXc5RrU2s/SYr/RR+6+HABTuHDqb0rqoph/E30dwarqPHciyk
   it58b3x15YZlmDKiOcc=
   -----END CERTIFICATE-----
+fips: false
