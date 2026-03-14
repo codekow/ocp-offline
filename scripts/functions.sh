@@ -1,5 +1,28 @@
 #!/bin/bash
 
+confirm_cmd(){
+  echo "Run the following?
+  "
+  echo "$@
+  "
+  
+  [ "${CONFIRM}" = "always" ] || read -p \
+    "[Y]es / [n]o / [a]lways " CONFIRM
+
+  case ${CONFIRM} in
+    [yY]*)
+      $@
+    ;;
+    [aA]*)
+      CONFIRM=always
+      $@
+    ;;
+    *)
+      return 0
+    ;;
+  esac
+}
+
 check_prereqs(){
   which nmstatectl || sudo dnf install /usr/bin/nmstatectl -y
 }
