@@ -28,6 +28,7 @@ networking:
   - 172.30.0.0/16
 platform:
   baremetal:
+    externalBridge: br0
     apiVIPs:
     - 10.3.0.121
     ingressVIPs:
