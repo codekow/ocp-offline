@@ -97,6 +97,7 @@ oc_mirror_src2files(){
 
 oc_mirror_files2mirror(){
   SCRATCH=${SCRATCH:-${PWD}}
+  REG_HOST=${REG_HOST:-$(hostname):8443}
 
   pull_secret_merge_with_mirror
 
@@ -107,11 +108,12 @@ oc_mirror_files2mirror(){
     --authfile ${SCRATCH}/pull-combo.json \
     --image-timeout 60m \
     --from file://${SCRATCH}/files \
-      docker://$(hostname):8443/redhat
+      docker://${REG_HOST}/redhat
 }
 
 oc_mirror_src2mirror(){
   SCRATCH=${SCRATCH:-${PWD}}
+  REG_HOST=${REG_HOST:-$(hostname):8443}
 
   pull_secret_merge_with_mirror
 
@@ -122,7 +124,7 @@ oc_mirror_src2mirror(){
     --workspace file://${SCRATCH}/workspace \
     --authfile ${SCRATCH}/pull-combo.json \
     --image-timeout 60m \
-      docker://$(hostname):8443/redhat
+      docker://${REG_HOST}/redhat
 }
 
 mirror_registry_install(){
@@ -150,7 +152,7 @@ mirror_registry_install(){
   sudo firewall-cmd --add-port=8443/tcp --permanent
   sudo firewall-cmd --reload
 
-  podman login $(hostname):8443 -u "${REG_USER}" -p "${REG_PASS}"
+  podman login ${REG_HOST}:8443 -u "${REG_USER}" -p "${REG_PASS}"
 }
 
 mirror_registry_uninstall(){
@@ -182,7 +184,7 @@ extract_baremetal_install(){
   oc adm release extract \
     -a pull-combo.json \
     --command=openshift-baremetal-install \
-    "$(hostname):8443/redhat/openshift/release-images:${OCP_VER:-4.20.15}-x86_64"
+    "${REG_HOST}/redhat/openshift/release-images:${OCP_VER:-4.20.15}-x86_64"
 }
 
 extract_iso(){
@@ -191,6 +193,6 @@ extract_iso(){
     --path=/coreos/coreos-x86_64.iso:${HOME}/.cache/agent/image_cache \
     --filter-by-os=linux/amd64 \
     --confirm \
-    $(hostname):8443/redhat/openshift/release:${OCP_VER:-4.20.15}-x86_64-rhel-coreos
+    ${REG_HOST}/redhat/openshift/release:${OCP_VER:-4.20.15}-x86_64-rhel-coreos
     # quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f93e0978db7e4a065b8722d023bcf9d7e0dbe3cd1e78d83a190c168f205147fe
 }
