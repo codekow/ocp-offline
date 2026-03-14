@@ -153,18 +153,13 @@ pull_secret_merge_with_mirror(){
   cp pull-combo.json ${XDG_RUNTIME_DIR}/containers/auth.json
 }
 
-extract_ocp_install(){
+extract_baremetal_install(){
   # https://access.redhat.com/solutions/7062500
-  echo "
-    This openshift-install will not work correctly w/ agent create image...
-  "
 
-  echo '
   oc adm release extract \
     -a pull-combo.json \
-    --command=openshift-install \
+    --command=openshift-baremetal-install \
     "$(hostname):8443/redhat/openshift/release-images:${OCP_VER:-4.20.15}-x86_64"
-  '
 }
 
 extract_iso(){
