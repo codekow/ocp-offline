@@ -1,0 +1,113 @@
+apiVersion: v1
+baseDomain: chaos.lab
+metadata:
+  name: ocp1
+# arbiter:
+#   architecture: amd64
+#   hyperthreading: Enabled
+#   replicas: 1
+#   name: arbiter
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  replicas: 0
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.3.0.0/24
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+# bootstrapInPlace:
+#   installationDisk: /dev/sda
+platform:
+  baremetal:
+    externalBridge: br0
+    provisioningBridge: br0
+    apiVIPs:
+    - 10.3.0.121
+    ingressVIPs:
+    - 10.3.0.122
+    hosts:
+    - name: vm-00
+      role: master
+      bootMACAddress: 52:54:00:4e:ff:10
+      hardwareProfile: default
+      bmc:
+        address: redfish-virtualmedia://nab-02:8000/redfish/v1/Systems/vm-00
+        disableCertificateVerification: true
+        username: admin
+        password: alongpassword
+      rootDeviceHints:
+         deviceName: "/dev/sda"
+    - name: vm-01
+      role: master
+      bootMACAddress: 52:54:00:4e:ff:12
+      hardwareProfile: default
+      bmc:
+        address: redfish-virtualmedia://nab-02:8000/redfish/v1/Systems/vm-01
+        disableCertificateVerification: true
+        username: admin
+        password: alongpassword
+      rootDeviceHints:
+         deviceName: "/dev/sda"
+    - name: vm-02
+      role: master
+      bootMACAddress: 52:54:00:4e:ff:14
+      hardwareProfile: default
+      bmc:
+        address: redfish-virtualmedia://nab-02:8000/redfish/v1/Systems/vm-02
+        disableCertificateVerification: true
+        username: admin
+        password: alongpassword
+      rootDeviceHints:
+         deviceName: "/dev/sda"
+pullSecret: '{"auths": {"bootstrap-00:8443": {"auth": "aW5pdDphbG9uZ3Bhc3N3b3Jk"}}}'
+sshKey: |
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKk5DMDFPmpzto9s5Nk1FeqrPYNttJnvW6FCWUGrbLFo cory@keepass
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbbtKs6P4wpUbZxIJcEa0t0Hw0x6Tv/Ml1/J7fMRqlQ cory@kowbuntu
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZCclaNu304ostULU/oHr1C25LALS4+nFSFDwO5F7EZ cory@pinky
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFybml+CZeJma57fvjnUKUwuSEn0JZRpa9/SAlu4t/Ct cory@skeldora
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBVozIG+urkwIt9isbxcg+Eqjw/9FvzRK2pfZ59CPgwh cory@kowdora
+# !! Deprecated - might be a lie - trust the docs !!
+# imageContentSources:
+imageDigestSources:
+  - mirrors:
+    - bootstrap-00:8443/redhat/openshift/release
+    source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+  - mirrors:
+    - bootstrap-00:8443/redhat/openshift/release-images
+    source: quay.io/openshift-release-dev/ocp-release
+additionalTrustBundle: |
+  -----BEGIN CERTIFICATE-----
+  MIIDyjCCArKgAwIBAgIURIzZ73uVKl7O802law7bDcPMALowDQYJKoZIhvcNAQEL
+  BQAwZjELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAlZBMREwDwYDVQQHDAhOZXcgWW9y
+  azENMAsGA1UECgwEUXVheTERMA8GA1UECwwIRGl2aXNpb24xFTATBgNVBAMMDGJv
+  b3RzdHJhcC0wMDAeFw0yNjAzMTQwMzE5MzlaFw0yOTAxMDEwMzE5MzlaMGYxCzAJ
+  BgNVBAYTAlVTMQswCQYDVQQIDAJWQTERMA8GA1UEBwwITmV3IFlvcmsxDTALBgNV
+  BAoMBFF1YXkxETAPBgNVBAsMCERpdmlzaW9uMRUwEwYDVQQDDAxib290c3RyYXAt
+  MDAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCvdnBLhY9lW3Ec/u/c
+  ZglzKZDMdqwdYusk5QGkJxRU+bJz83ZitVgak+aK0b/KIzioArwQFwi6SAyLeZj7
+  1Sgz4mvFatEoqPyLQ76TT5JMVl2p7DEQcst7jtEipoumrh2PzgYxyKecLwzpxKah
+  O/4ymeNev1WA8shvmZDs6F/HN0z2QjA7OoG8MmH/Tv3kIyrpCoPpRy7G8viBvkqN
+  59dVhZ/nrk0ljcNr/VABHU7ygqYcyOa2xuEl6OHMCWYNq4Gph9dJsLdyPtisdugj
+  b4B9UVB1OkF0HGhQTjPa6POq89znUYoOn9KH2qpRk3La5AeTIhhKZYxTv5jbtzyQ
+  dlcxAgMBAAGjcDBuMAsGA1UdDwQEAwIC5DATBgNVHSUEDDAKBggrBgEFBQcDATAX
+  BgNVHREEEDAOggxib290c3RyYXAtMDAwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNV
+  HQ4EFgQUl0e6NEZyxCDIfOIWFbfuBfK/DsAwDQYJKoZIhvcNAQELBQADggEBAG/Y
+  JGKfzDoMoIBHk3xfMjpAKBP/4Du204n1V3Iw1MXmAge/K6vMnIwZo0h9pkV7JG0/
+  f1+AfpTKrSscbmucKeHyYcGGPiMK64FRNCaEz6qdonNKFNBB2V1ApZC/pPH+j6oq
+  d7Q62oZK9aGDY7FZhUbg7sGnl0DddUMLoB8/FIrnuR9cZdB1vpWLDAJ1GBjGOTlC
+  9h6jZvB1z5sNWEdcbVz1bsbWNop9nQU+qTm6SLKDlZLuPGUKpHy+axfg58WiDroe
+  vh7eGEGCQujUDuApPEX2KxUOMrroETYEpmCvLmBRI7/obxFtH4Av921NLqR+/OvU
+  ItDUphV+0zPpPbSfx8Q=
+  -----END CERTIFICATE-----
+fips: false
