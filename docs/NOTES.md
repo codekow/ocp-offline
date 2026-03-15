@@ -97,6 +97,20 @@ podman login $(hostname):8443
 oc_mirror_src2mirror
 ```
 
+Create agent based iso for cluster install
+
+```sh
+# copy install / agent configs into empty dir
+mkdir install
+cp ../configs/agent/*.yaml install
+
+# create iso for agent based install
+openshift-install agent create image --dir install
+
+# list all the artifacts created for install
+find install/
+```
+
 Disable default operatorhub catalog sources
 
 ```sh
