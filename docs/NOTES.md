@@ -85,14 +85,22 @@ cp ../dump/agent/isc-ocp*.yaml .
 cd quay
 mirror_registry_install /srv/registry
 cd ..
-
-# directly mirror what is online to a disconnected registry
-oc_mirror_src2mirror
 ```
 
 ```sh
 # login to mirror registry
 podman login $(hostname):8443
+```
+
+```sh
+# directly mirror what is online to a disconnected registry
+oc_mirror_src2mirror
+```
+
+Disable default operatorhub catalog sources
+
+```sh
+oc patch OperatorHub cluster --type json -p '[{"op": "add", "path": "/spec/disableAllDefaultSources", "value": true}]'
 ```
 
 Create an iso to add worker nodes to an existing cluster
