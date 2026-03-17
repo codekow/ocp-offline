@@ -27,6 +27,27 @@ Additional options
   - [x] I’m installing on a disconnected/air-gapped/secured environment
 - [Agent Based Installer - Home Lab Notes](https://github.com/mariocr73/OCP-ABI-BAREMETAL)
 
+## Validation checks
+
+### NTP
+
+```sh
+# Do this on the bastion host
+yq '.additionalNTPSources[]' install-config.yaml |
+  while read -r ip
+  do
+    if >/dev/null which ntpdate
+    then ntpdate -q "$ip" && return 1
+    else sudo chronyd -Q "server $ip iburst"
+    fi
+  done
+```
+
+### Certificate Bundle
+
+```sh
+curl -vvv --cacert <(yq -r '.additionalTrustBundle' install-config.yaml) https://internal.registry:12345
+```
 ## Commands
 
 Install `nmstatectl` on your bastion host - this is required to verify your network config in `agent-config.yaml`
@@ -121,4 +142,13 @@ Create an iso to add worker nodes to an existing cluster
 
 ```sh
 oc adm node-image create
+```
+
+Once the ISO's been mounted on all of the hosts, run this command to watch the
+install go!
+
+```sh
+openshift-install agent wait-for bootstrap-complete \
+  --dir . \
+  --log-level=info
 ```
