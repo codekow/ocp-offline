@@ -112,10 +112,10 @@ registry_cert_ca_trust(){
   if [ -d /etc/pki/ca-trust/source/anchors/ ]; then
     [ -e /etc/pki/ca-trust/source/anchors/"${REGISTRY_HOSTNAME}.crt" ] && return
     echo "copying ${REGISTRY_HOSTNAME}.crt to /etc/pki/ca-trust/source/anchors/"
-    cp -u "registry/config/${REGISTRY_HOSTNAME}.crt" /etc/pki/ca-trust/source/anchors/
-    update-ca-trust
+    sudo cp -u "registry/config/${REGISTRY_HOSTNAME}.crt" /etc/pki/ca-trust/source/anchors/
+    sudo update-ca-trust
   else
-    cp -u "registry/config/${REGISTRY_HOSTNAME}.crt" /usr/local/share/ca-certificates/
+    sudo cp -u "registry/config/${REGISTRY_HOSTNAME}.crt" /usr/local/share/ca-certificates/
   fi
 }
 
