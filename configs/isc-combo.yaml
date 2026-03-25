@@ -95,6 +95,8 @@ mirror:
     - name: registry.redhat.io/ubi10/ubi:latest
     - name: ghcr.io/redhat-na-ssa/web-terminal-tooling:latest
     - name: registry.redhat.io/openshift4/ose-cli:latest
-    - name: ghcr.io/project-zot/zot:latest
+    - name: registry.redhat.io/rhel9/rhel-guest-image:latest
+    - name: quay.io/containerdisks/fedora:latest
+    # - name: ghcr.io/project-zot/zot:latest
     #  add any other images that you want from registry.redhat.io, quay.io, or your public registry
     #  to make them available in the disconnected environment.
