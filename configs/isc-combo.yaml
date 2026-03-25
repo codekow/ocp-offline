@@ -29,10 +29,6 @@ mirror:
           defaultChannel: fast
           minVersion: 1.15.0
           maxVersion: 1.15.0
-        - name: power-monitoring-operator
-          defaultChannel: tech-preview
-          minVersion: 0.5.0
-          maxVersion: 0.5.0
   additionalImages:
     - name: registry.redhat.io/ubi8/ubi:latest
     - name: registry.redhat.io/ubi9/ubi:latest
