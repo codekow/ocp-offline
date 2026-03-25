@@ -7,7 +7,7 @@ spec:
   priority: 0
   source:
     image:
-      ref: bootstrap-00:8443/redhat/redhat/redhat-operator-index:v4.20
+      ref: bastion-00:8443/redhat/redhat/redhat-operator-index:v4.20
     type: Image
 ---
 apiVersion: operators.coreos.com/v1alpha1
@@ -16,5 +16,5 @@ metadata:
   name: cs-redhat-operator-index-v4-20
   namespace: openshift-marketplace
 spec:
-  image: bootstrap-00:8443/redhat/redhat/redhat-operator-index:v4.20
+  image: bastion-00:8443/redhat/redhat/redhat-operator-index:v4.20
   sourceType: grpc
