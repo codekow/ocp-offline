@@ -3,13 +3,6 @@
 kind: ImageSetConfiguration
 apiVersion: mirror.openshift.io/v2alpha1
 mirror:
-  platform:
-    channels:
-      - name: stable-4.20
-        type: ocp
-        minVersion: 4.20.15
-        maxVersion: 4.20.15
-    graph: true
   operators:
     - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.20
       packages:
@@ -77,26 +70,3 @@ mirror:
           defaultChannel: fast
           minVersion: 1.15.0
           maxVersion: 1.15.0
-    - catalog: registry.redhat.io/redhat/community-operator-index:v4.20
-      packages:
-        - name: group-sync-operator
-          defaultChannel: alpha
-          # minVersion: 0.0.36
-          # maxVersion: 0.0.36
-    # - catalog: registry.redhat.io/redhat/certified-operator-index:v4.20
-    #   packages:
-    #     - name: dell-csm-operator-certified
-    #       defaultChannel: stable
-    #       minVersion: 1.11.2
-    #       # maxVersion: 1.11.2
-  additionalImages:
-    - name: registry.redhat.io/ubi8/ubi:latest
-    - name: registry.redhat.io/ubi9/ubi:latest
-    - name: registry.redhat.io/ubi10/ubi:latest
-    - name: registry.redhat.io/openshift4/ose-cli:latest
-    - name: registry.redhat.io/rhel9/rhel-guest-image:latest
-    - name: quay.io/containerdisks/fedora:latest
-    # - name: ghcr.io/redhat-na-ssa/web-terminal-tooling:latest
-    # - name: ghcr.io/project-zot/zot:latest
-    #  add any other images that you want from registry.redhat.io, quay.io, or your public registry
-    #  to make them available in the disconnected environment.
