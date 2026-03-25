@@ -83,7 +83,7 @@ download_files(){
   cd ..
 }
 
-oc_mirror_src2files(){
+oc_mirror_src2disk(){
   SCRATCH=${SCRATCH:-${PWD}}
 
   TMPDIR=${SCRATCH} \
@@ -95,7 +95,7 @@ oc_mirror_src2files(){
       file://${SCRATCH}/files
 }
 
-oc_mirror_files2mirror(){
+oc_mirror_disk2mirror(){
   SCRATCH=${SCRATCH:-${PWD}}
   REG_HOST=${REG_HOST:-$(hostname):8443}
 
