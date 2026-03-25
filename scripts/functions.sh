@@ -128,9 +128,9 @@ oc_mirror_src2mirror(){
 }
 
 mirror_registry_install(){
-
   [ -x mirror-registry ] || return 0
 
+  REG_HOST=${REG_HOST:-$(hostname):8443}
   REG_PATH=${1:-${PWD}}
   REG_USER=${2:-init}
   REG_PASS=${3:-alongpassword}
