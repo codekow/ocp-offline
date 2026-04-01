@@ -259,6 +259,14 @@ cat << JSON >> registry/config/99-zot.tmp
     },
     "mgmt": {
       "enable": true
+    },
+    "trust": {
+      "enable": true,
+      "cosign": true,
+      "notation": true
+    },
+    "scrub": {
+      "interval": "72h"
     }
   }
 }

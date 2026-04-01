@@ -1,0 +1,13 @@
+FROM registry.access.redhat.com/ubi9/ubi:latest
+
+# The following command is used to extract the graph data tarball and remove unwanted channels/versions
+RUN mkdir -p /var/lib/cincinnati-graph-data \
+    && curl -sL https://api.openshift.com/api/upgrades_info/graph-data \ 
+      | tar xvz -C /var/lib/cincinnati-graph-data/ --no-overwrite-dir --no-same-owner \
+    && rm -vf /var/lib/cincinnati-graph-data/blocked-edges/4.{1..16}.*.yaml \
+    && rm -vf /var/lib/cincinnati-graph-data/channels/candidate* \
+    && rm -vf /var/lib/cincinnati-graph-data/channels/fast* \
+    && rm -vf /var/lib/cincinnati-graph-data/channels/pre* \
+    && rm -vf /var/lib/cincinnati-graph-data/channels/*-4.{1..16}.yaml
+
+CMD ["/bin/bash", "-c" ,"exec cp -rp /var/lib/cincinnati-graph-data/* /var/lib/cincinnati/graph-data"]
