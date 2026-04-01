@@ -1,0 +1,142 @@
+{
+  "storage": {
+    "rootDirectory": "/var/lib/registry",
+    "commit": false,
+    "dedupe": true,
+    "gc": true,
+    "gcDelay": "1h",
+    "gcInterval": "24h"
+  },
+  "http": {
+    "address": "0.0.0.0",
+    "port": "5000",
+    "tls": {
+      "cert": "/etc/zot/localhost.crt",
+      "key": "/etc/zot/localhost.key"
+    },
+    "auth": {
+      "htpasswd": {
+        "path": "/etc/zot/secret/htpasswd"
+      },
+      "failDelay": 5
+    },
+    "realm": "zot",
+    "compat": ["docker2s2"]
+  },
+  "log": {
+    "level": "info",
+    "output": "/var/lib/registry/zot-main.log",
+    "audit": "/var/lib/registry/zot-audit.log"
+  },
+  "extensions": {
+		"sync": {
+      "enable": true,
+      "credentialsFile": "/etc/zot/secret/upstream-auth.json",
+      "registries": [
+        {
+          "urls": ["https://index.docker.io"],
+          "content": [
+            {
+              "prefix": "**", 
+              "destination": "/docker.io"
+            }
+          ],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 5,
+          "retryDelay": "30s"
+				},
+        {
+          "urls": ["https://ghcr.io"],
+          "content": [
+            {
+              "prefix": "**", 
+              "destination": "/ghcr.io"
+            }
+          ],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 5,
+          "retryDelay": "30s"
+				},
+        {
+          "urls": ["https://k8s.gcr.io"],
+          "content": [
+            {
+              "prefix": "**", 
+              "destination": "/k8s.gcr.io"
+            }
+          ],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 5,
+          "retryDelay": "30s"
+				},
+        {
+          "urls": ["https://quay.io"],
+          "content": [
+            {
+              "prefix": "**", 
+              "destination": "/quay.io"
+            }
+          ],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 5,
+          "retryDelay": "30s"
+				},
+        {
+          "urls": ["https://registry.access.redhat.com"],
+          "content": [
+            {
+              "prefix": "**", 
+              "destination": "/registry.access.redhat.com"
+            }
+          ],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 5,
+          "retryDelay": "30s"
+				},
+        {
+          "urls": ["https://registry.connect.redhat.com"],
+          "content": [
+            {
+              "prefix": "**", 
+              "destination": "/registry.connect.redhat.com"
+            }
+          ],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 5,
+          "retryDelay": "30s"
+				},
+        {
+          "urls": ["https://registry.redhat.io"],
+          "content": [
+            {
+              "prefix": "**", 
+              "destination": "/registry.redhat.io"
+            }
+          ],
+          "onDemand": true,
+          "tlsVerify": true,
+          "maxRetries": 5,
+          "retryDelay": "30s"
+				}
+      ]
+    },
+    "search": {
+      "enable": true,
+      "cve": {
+        "updateInterval": "4h"
+      }
+    },
+    "ui": {
+      "enable": true
+    },
+    "mgmt": {
+      "enable": true
+    }
+  }
+}

@@ -1,0 +1,21 @@
+[Unit]
+Description="ZOT Container Registry"
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/podman start -a mirror-registry
+ExecStop=/usr/bin/podman stop -t 10 mirror-registry
+
+#  [ $EUID -eq 0 ] && POD_USER="--user 1000"
+#
+#  podman run -d \
+#    --replace \
+#    --name mirror-registry \
+#    ${POD_USER} \
+#    -p 5000:5000 \
+#    -v ./registry/config:/etc/zot:z \
+#    -v ./registry/data/zot:/var/lib/registry:z \
+#      ghcr.io/project-zot/zot:latest
+
+[Install]
+WantedBy=network-online.target
