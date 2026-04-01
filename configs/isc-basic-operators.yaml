@@ -16,10 +16,6 @@ mirror:
           defaultChannel: stable
           minVersion: 4.20.0-202602091941
           maxVersion: 4.20.0-202602091941
-        - name: kubevirt-hyperconverged
-          defaultChannel: stable
-          minVersion: 4.20.7
-          maxVersion: 4.20.7
         - name: web-terminal
           defaultChannel: fast
           minVersion: 1.15.0

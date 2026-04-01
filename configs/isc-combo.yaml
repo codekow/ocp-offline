@@ -69,6 +69,10 @@ mirror:
           defaultChannel: stable
           minVersion: 0.10.3
           # maxVersion: 0.10.3
+        - name: redhat-oadp-operator
+          defaultChannel: stable
+          minVersion: 1.5.5
+          # maxVersion: 1.5.5
         - name: self-node-remediation
           defaultChannel: stable
           minVersion: 0.11.1
@@ -95,7 +99,8 @@ mirror:
     - name: registry.redhat.io/ubi10/ubi:latest
     - name: registry.redhat.io/openshift4/ose-cli:latest
     - name: registry.redhat.io/rhel9/rhel-guest-image:latest
-    - name: quay.io/containerdisks/fedora:latest
+    - name: registry.redhat.io/rhel9/support-tools:latest
+    # - name: quay.io/containerdisks/fedora:latest
     # - name: ghcr.io/redhat-na-ssa/web-terminal-tooling:latest
     # - name: ghcr.io/project-zot/zot:latest
     #  add any other images that you want from registry.redhat.io, quay.io, or your public registry

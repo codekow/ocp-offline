@@ -62,6 +62,10 @@ mirror:
           defaultChannel: stable
           minVersion: 0.10.3
           # maxVersion: 0.10.3
+        - name: redhat-oadp-operator
+          defaultChannel: stable
+          minVersion: 1.5.5
+          # maxVersion: 1.5.5
         - name: self-node-remediation
           defaultChannel: stable
           minVersion: 0.11.1
