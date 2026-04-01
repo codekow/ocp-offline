@@ -17,3 +17,4 @@ OpenShift Offline Configuration Notes
 - [Agent Based Installer - Notes](docs/NOTES.md)
 - [Agent Based Installer - Home Lab](https://github.com/mariocr73/OCP-ABI-BAREMETAL)
 - [Bare Metal - UPI](https://github.com/ryanhay/ocp4-metal-install)
+- [Kenmoini Notes on Disconnected Installs](https://github.com/kenmoini/disconnected-openshift)
