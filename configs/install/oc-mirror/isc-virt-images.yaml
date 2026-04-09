@@ -4,9 +4,16 @@ kind: ImageSetConfiguration
 apiVersion: mirror.openshift.io/v2alpha1
 mirror:
   additionalImages:
-    - name: registry.redhat.io/container-native-virtualization/rhel9-server-container:latest
-    - name: registry.redhat.io/container-native-virtualization/rhel8-server-container:latest
-    # - name: quay.io/containerdisks/fedora:latest
+    # - name: registry.redhat.io/container-native-virtualization/rhel9-server-container:latest
+    # - name: registry.redhat.io/container-native-virtualization/rhel8-server-container:latest
+    # - name: registry.redhat.io/container-native-virtualization/virtio-win:latest
+    - name: registry.redhat.io/container-native-virtualization/virtio-win-rhel9:v4.20
+    - name: quay.io/containerdisks/centos-stream:9
+    - name: quay.io/containerdisks/centos-stream:10
+    - name: quay.io/containerdisks/fedora:latest
+    - name: registry.redhat.io/rhel8/rhel-guest-image:latest
+    - name: registry.redhat.io/rhel9/rhel-guest-image:latest
+    - name: registry.redhat.io/rhel10/rhel-guest-image:latest
     # - name: ghcr.io/redhat-na-ssa/web-terminal-tooling:latest
     # - name: ghcr.io/project-zot/zot:latest
     #  add any other images that you want from registry.redhat.io, quay.io, or your public registry
