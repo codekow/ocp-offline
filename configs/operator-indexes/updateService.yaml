@@ -1,0 +1,8 @@
+apiVersion: updateservice.operator.openshift.io/v1
+kind: UpdateService
+metadata:
+  name: update-service-oc-mirror
+spec:
+  graphDataImage: bastion-00:5000/redhat/openshift/graph-image:latest
+  releases: bastion-00:5000/redhat/openshift/release-images
+  replicas: 1
