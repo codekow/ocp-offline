@@ -46,8 +46,9 @@ yq '.additionalNTPSources[]' install-config.yaml |
 ### Certificate Bundle
 
 ```sh
-curl -vvv --cacert <(yq -r '.additionalTrustBundle' install-config.yaml) https://internal.registry:12345
+curl -vvv --cacert <(yq -r '.additionalTrustBundle' install-config.yaml) https://bastion-00:8443
 ```
+
 ## Commands
 
 Install `nmstatectl` on your bastion host - this is required to verify your network config in `agent-config.yaml`
@@ -95,7 +96,7 @@ openshift-install version
 
 ```sh
 # copy the isc.yaml into current dir
-cp ../dump/agent/isc-ocp*.yaml .
+cp ../configs/install/oc-mirror/isc-ocp*.yaml .
 
 # these commands are used to create tar(s) and load the tar(s) into the disconnected mirror
 # oc_mirror_src2files
@@ -123,7 +124,7 @@ Create agent based iso for cluster install
 ```sh
 # copy install / agent configs into empty dir
 mkdir install
-cp ../configs/agent/*.yaml install
+cp ../configs/install/agent/*.yaml install
 
 # create iso for agent based install
 openshift-install agent create image --dir install
@@ -149,6 +150,6 @@ install go!
 
 ```sh
 openshift-install agent wait-for bootstrap-complete \
-  --dir . \
+  --dir install \
   --log-level=info
 ```
