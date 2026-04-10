@@ -95,18 +95,32 @@ openshift-install version
 ```
 
 ```sh
-# copy the isc.yaml into current dir
-cp ../configs/install/oc-mirror/isc-ocp*.yaml .
-
-# these commands are used to create tar(s) and load the tar(s) into the disconnected mirror
-# oc_mirror_src2files
-# oc_mirror_files2mirror
-
 # install mirror-registry
 # this folder will have the extracted mirror-registry files
 cd quay
 mirror_registry_install /srv/registry
 cd ..
+```
+
+```sh
+# alternative registry-mirror
+
+```
+
+
+```sh
+# these commands are used to create tar(s) and load the tar(s) into the disconnected mirror
+# oc_mirror_src2files
+# oc_mirror_files2mirror
+```
+
+```sh
+
+```
+
+```sh
+# copy the isc.yaml into current dir
+cp ../configs/install/oc-mirror/isc-ocp*.yaml isc.yaml
 ```
 
 ```sh

@@ -405,8 +405,10 @@ local_registry_browser_run(){
       docker.io/klausmeyer/docker-registry-browser
 }
 
-check_cmds
-registry_init
-local_registry_mirror
-# local_registry_browser_run
-registry_print_info
+mirror_registry_install(){
+  check_cmds
+  registry_init
+  local_registry_mirror
+  # local_registry_browser_run
+  registry_print_info
+}
