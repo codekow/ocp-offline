@@ -196,3 +196,41 @@ extract_iso(){
     ${REG_HOST}/redhat/openshift/release:${OCP_VER:-4.20.15}-x86_64-rhel-coreos
     # quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f93e0978db7e4a065b8722d023bcf9d7e0dbe3cd1e78d83a190c168f205147fe
 }
+
+extract_samples_mapping(){
+  REG_HOST=${REG_HOST:-bastion-00:5000}
+  REG_PATH=${REG_PATH:-${REG_HOST}/redhat/samples/}
+
+  echo > mapping.txt
+  echo > samples-configmap-data.txt
+
+  JSON="$(oc get cm -n openshift-cluster-samples-operator imagestreamtag-to-image -o json)"
+
+  for key in $(echo $JSON | jq --raw-output '.data | keys[]')
+  do
+    IMAGE="$(echo $JSON | jq --arg key $key -r '.data | .[$key]')"
+    URL_PATH="$(echo $IMAGE | cut -d/ -f2-)"
+    urlpathwithouttag="$(echo $URL_PATH | cut -d: -f1)"
+
+    echo "IS: $key"
+    echo "Image: $IMAGE"
+    echo "Path: $URL_PATH"
+    echo "$key: '${REG_HOST}${URL_PATH}'" >> samples-configmap-data.txt
+    
+    if echo $URL_PATH | grep -q -v ":"; then
+      continue
+    fi
+
+    echo $IMAGE=${REG_HOST}${URL_PATH} >> mapping.txt
+    echo "---"
+  done
+
+  sort mapping.txt | uniq > mapping.tmp
+  mv mapping.tmp mapping.txt
+
+  oc image mirror \
+    --skip-multiple-scopes=true \
+    --continue-on-error \
+    --insecure=true \
+    -a ./pull-combo.json -f mapping.txt
+}

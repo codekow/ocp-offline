@@ -130,7 +130,7 @@ mkdir install
 cp ../configs/install/agent/*.yaml install
 
 # set certificate bundle
-curl -vvv --cacert <(yq -r '.additionalTrustBundle' install/install-config.yaml) https://bastion-00:8443
+curl -vvv --cacert <(yq -r '.additionalTrustBundle' install/install-config.yaml) https://bastion-00:5000
 
 # create iso for agent based install
 openshift-install agent create image --dir install

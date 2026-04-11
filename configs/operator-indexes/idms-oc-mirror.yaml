@@ -19,23 +19,29 @@ metadata:
 spec:
   imageDigestMirrors:
   - mirrors:
-    - bastion-00:5000/redhat/oadp
-    source: registry.redhat.io/oadp
-  - mirrors:
-    - bastion-00:5000/redhat/multicluster-engine
-    source: registry.redhat.io/multicluster-engine
-  - mirrors:
-    - bastion-00:5000/redhat/migration-toolkit-virtualization
-    source: registry.redhat.io/migration-toolkit-virtualization
+    - bastion-00:5000/redhat/devworkspace
+    source: registry.redhat.io/devworkspace
   - mirrors:
     - bastion-00:5000/redhat/openshift-update-service
     source: registry.redhat.io/openshift-update-service
   - mirrors:
-    - bastion-00:5000/redhat/rhmtc
-    source: registry.redhat.io/rhmtc
+    - bastion-00:5000/redhat/rhem
+    source: registry.redhat.io/rhem
   - mirrors:
-    - bastion-00:5000/redhat/rhacm2
-    source: registry.redhat.io/rhacm2
+    - bastion-00:5000/redhat/community-operator-pipeline-prod
+    source: quay.io/community-operator-pipeline-prod
+  - mirrors:
+    - bastion-00:5000/redhat/workload-availability
+    source: registry.redhat.io/workload-availability
+  - mirrors:
+    - bastion-00:5000/redhat/rhel9
+    source: registry.redhat.io/rhel9
+  - mirrors:
+    - bastion-00:5000/redhat/oadp
+    source: registry.redhat.io/oadp
+  - mirrors:
+    - bastion-00:5000/redhat/kube-descheduler-operator
+    source: registry.redhat.io/kube-descheduler-operator
   - mirrors:
     - bastion-00:5000/redhat/rhel8
     source: registry.redhat.io/rhel8
@@ -43,32 +49,26 @@ spec:
     - bastion-00:5000/redhat/openshift4
     source: registry.redhat.io/openshift4
   - mirrors:
+    - bastion-00:5000/redhat/container-native-virtualization
+    source: registry.redhat.io/container-native-virtualization
+  - mirrors:
+    - bastion-00:5000/redhat/multicluster-engine
+    source: registry.redhat.io/multicluster-engine
+  - mirrors:
     - bastion-00:5000/redhat/ubi9
     source: registry.redhat.io/ubi9
   - mirrors:
-    - bastion-00:5000/redhat/rhel9
-    source: registry.redhat.io/rhel9
-  - mirrors:
-    - bastion-00:5000/redhat/container-native-virtualization
-    source: registry.redhat.io/container-native-virtualization
+    - bastion-00:5000/redhat/migration-toolkit-virtualization
+    source: registry.redhat.io/migration-toolkit-virtualization
   - mirrors:
     - bastion-00:5000/redhat/redhat-cop
     source: quay.io/redhat-cop
   - mirrors:
-    - bastion-00:5000/redhat/community-operator-pipeline-prod
-    source: quay.io/community-operator-pipeline-prod
-  - mirrors:
-    - bastion-00:5000/redhat/rhem
-    source: registry.redhat.io/rhem
-  - mirrors:
-    - bastion-00:5000/redhat/workload-availability
-    source: registry.redhat.io/workload-availability
-  - mirrors:
-    - bastion-00:5000/redhat/kube-descheduler-operator
-    source: registry.redhat.io/kube-descheduler-operator
-  - mirrors:
-    - bastion-00:5000/redhat/devworkspace
-    source: registry.redhat.io/devworkspace
+    - bastion-00:5000/redhat/rhacm2
+    source: registry.redhat.io/rhacm2
   - mirrors:
     - bastion-00:5000/redhat/web-terminal
     source: registry.redhat.io/web-terminal
+  - mirrors:
+    - bastion-00:5000/redhat/rhmtc
+    source: registry.redhat.io/rhmtc

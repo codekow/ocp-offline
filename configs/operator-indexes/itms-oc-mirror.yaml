@@ -16,14 +16,14 @@ metadata:
 spec:
   imageTagMirrors:
   - mirrors:
-    - bastion-00:5000/redhat/rhel9
-    source: registry.redhat.io/rhel9
+    - bastion-00:5000/redhat/ubi10
+    source: registry.redhat.io/ubi10
   - mirrors:
     - bastion-00:5000/redhat/openshift4
     source: registry.redhat.io/openshift4
   - mirrors:
-    - bastion-00:5000/redhat/ubi10
-    source: registry.redhat.io/ubi10
+    - bastion-00:5000/redhat/rhel9
+    source: registry.redhat.io/rhel9
   - mirrors:
     - bastion-00:5000/redhat/ubi9
     source: registry.redhat.io/ubi9
