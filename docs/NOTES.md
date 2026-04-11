@@ -85,6 +85,7 @@ openshift-install version
 # setup autocomplete
 . <(oc completion bash)
 . <(openshift-install completion bash)
+. <(opm completion bash)
 . <(oc-mirror --v2 completion bash)
 ```
 
@@ -158,4 +159,27 @@ install go!
 openshift-install agent wait-for bootstrap-complete \
   --dir install \
   --log-level=info
+```
+
+### List Operators
+
+```sh
+# install opm
+curl -L https://github.com/operator-framework/operator-registry/releases/latest/download/linux-amd64-opm -o opm
+chmod +x opm
+sudo mv opm /usr/local/bin/
+
+# pull index image
+podman pull registry.redhat.io/redhat/redhat-operator-index:v4.20
+
+# get operators with their channels
+opm render registry.redhat.io/redhat/redhat-operator-index:v4.20 | \
+  jq -r 'select(.schema == "olm.channel") | "\(.package):\(.name)"' | \
+  sort
+
+# get all channel data
+opm render registry.redhat.io/redhat/redhat-operator-index:v4.20 | jq 'select(.schema == "olm.channel") | {package: .package, channel: .name, entries: .entries}'
+
+# get all operators in the index without channel
+opm render registry.redhat.io/redhat/redhat-operator-index:v4.20 | jq -r 'select(.schema == "olm.package") | .name' | sort | uniq
 ```

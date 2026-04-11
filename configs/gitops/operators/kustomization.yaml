@@ -3,5 +3,7 @@ kind: Kustomization
 
 components:
   - group-sync
-  - virtualization-operator
+  - nmstate
+  - node-maintenance
+  - virtualization
   - web-terminal

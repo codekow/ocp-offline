@@ -72,6 +72,11 @@ download_files(){
   chmod +x oc-mirror
   mv oc-mirror ~/bin
 
+  # get opm
+  wget -c -nc https://github.com/operator-framework/operator-registry/releases/latest/download/linux-amd64-opm
+  chmod +x linux-amd64-opm
+  mv linux-amd64-opm ~/bin/opm
+
   # get mirror-registry
   wget -c -nc https://mirror.openshift.com/pub/cgw/mirror-registry/latest/mirror-registry-amd64.tar.gz
 
