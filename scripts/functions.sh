@@ -212,9 +212,9 @@ extract_samples_mapping(){
     URL_PATH="$(echo $IMAGE | cut -d/ -f2-)"
     urlpathwithouttag="$(echo $URL_PATH | cut -d: -f1)"
 
-    echo "IS: $key"
-    echo "Image: $IMAGE"
-    echo "Path: $URL_PATH"
+    echo "Key:    $key"
+    echo "Image:  $IMAGE"
+    echo "Path:   $URL_PATH"
     echo "$key: '${REG_HOST}${URL_PATH}'" >> samples-configmap-data.txt
     
     if echo $URL_PATH | grep -q -v ":"; then
