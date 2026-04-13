@@ -2,4 +2,4 @@ scratch/
 container/tools-x86_64.tgz
 
 # install folder
-ocp-install/
+install/

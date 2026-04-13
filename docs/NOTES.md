@@ -66,8 +66,8 @@ git clone https://github.com/codekow/ocp-offline
 cd ocp-offline
 
 # make new folder for all the artifacts
-mkdir ocp-install
-cd ocp-install
+mkdir scratch
+cd scratch
 
 # load functions
 . ../scripts/functions.sh

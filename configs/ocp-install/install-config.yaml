@@ -1,0 +1,121 @@
+apiVersion: v1
+baseDomain: chaos.lab
+metadata:
+  name: ocp1
+# arbiter:
+#   architecture: amd64
+#   hyperthreading: Enabled
+#   replicas: 1
+#   name: arbiter
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  replicas: 0
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.3.0.0/24
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+# bootstrapInPlace:
+#   installationDisk: /dev/sda
+platform:
+  baremetal:
+    externalBridge: br0
+    provisioningBridge: br0
+    apiVIPs:
+    - 10.3.0.121
+    ingressVIPs:
+    - 10.3.0.122
+    hosts:
+    - name: vm-00
+      role: master
+      bootMACAddress: 52:54:00:4e:ff:10
+      hardwareProfile: default
+      bmc:
+        address: redfish-virtualmedia://nab-02:8000/redfish/v1/Systems/vm-00
+        disableCertificateVerification: true
+        username: admin
+        password: alongpassword
+      rootDeviceHints:
+         deviceName: "/dev/sda"
+    - name: vm-01
+      role: master
+      bootMACAddress: 52:54:00:4e:ff:12
+      hardwareProfile: default
+      bmc:
+        address: redfish-virtualmedia://nab-02:8000/redfish/v1/Systems/vm-01
+        disableCertificateVerification: true
+        username: admin
+        password: alongpassword
+      rootDeviceHints:
+         deviceName: "/dev/sda"
+    - name: vm-02
+      role: master
+      bootMACAddress: 52:54:00:4e:ff:14
+      hardwareProfile: default
+      bmc:
+        address: redfish-virtualmedia://nab-02:8000/redfish/v1/Systems/vm-02
+        disableCertificateVerification: true
+        username: admin
+        password: alongpassword
+      rootDeviceHints:
+         deviceName: "/dev/sda"
+pullSecret: '{"auths": {"bastion-00:5000": {"auth": "aW5pdDphbG9uZ3Bhc3N3b3Jk"}}}'
+# see https://access.redhat.com/solutions/7088037
+# multi-line ssh keys cause metal3 to crash loop
+# oc -n kube-system edit cm cluster-config-v1 -o yaml
+sshKey: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFybml+CZeJma57fvjnUKUwuSEn0JZRpa9/SAlu4t/Ct cory@skeldora'
+# !! Deprecated - might be a lie - trust the docs !!
+# imageContentSources:
+imageDigestSources:
+  - mirrors:
+    - bastion-00:5000/redhat/openshift/release
+    source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+  - mirrors:
+    - bastion-00:5000/redhat/openshift/release-images
+    source: quay.io/openshift-release-dev/ocp-release
+additionalTrustBundle: |
+  -----BEGIN CERTIFICATE-----
+  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
+  -----END CERTIFICATE-----
+fips: false
