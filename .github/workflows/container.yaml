@@ -9,11 +9,11 @@ on:  # yamllint disable-line rule:truthy
   push:
     branches: ["main"]
     paths:
-    - container/**
+    - container/ocp-tools/**
   pull_request:
     branches: ["main"]
     paths:
-    - container/**
+    - container/ocp-tools/**
 
 concurrency:
   group: offline-artifacts
@@ -41,13 +41,13 @@ jobs:
         uses: actions/cache@v4
         id: cache-tooling-binaries
         with:
-          path: container/tools-x86_64.tgz
-          key: ${{ hashFiles('container/bin.sh', 'container/download_tools.sh') }}
+          path: container/ocp-tools/tools-x86_64.tgz
+          key: ${{ hashFiles('container/ocp-tools/bin.sh', 'container/ocp-tools/download_tools.sh') }}
 
       - name: Download tooling binaries
         if: steps.cache-tooling-binaries.outputs.cache-hit != 'true'
         run: |
-          cd container
+          cd container/ocp-tools
           ./download_tools.sh
 
       - name: Log into GitHub Container Registry
@@ -62,7 +62,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: container
-          file: container/Containerfile
+          file: container/ocp-tools/Containerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ghcr.io/${{ github.repository }}:git-${{ steps.meta.outputs.sha }}
