@@ -61,7 +61,7 @@ jobs:
       - name: Build and push images to ghcr.io
         uses: docker/build-push-action@v5
         with:
-          context: container
+          context: container/ocp-tools
           file: container/ocp-tools/Containerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
