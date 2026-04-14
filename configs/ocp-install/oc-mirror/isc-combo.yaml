@@ -100,6 +100,8 @@ mirror:
     - name: registry.redhat.io/openshift4/ose-cli:latest
     - name: registry.redhat.io/rhel9/rhel-guest-image:latest
     - name: registry.redhat.io/rhel9/support-tools:latest
+    # vddk init image
+    - name: quay.io/dsorrent/vddk:9.0.1.0
     # - name: quay.io/containerdisks/fedora:latest
     # - name: ghcr.io/redhat-na-ssa/web-terminal-tooling:latest
     # - name: ghcr.io/project-zot/zot:latest
