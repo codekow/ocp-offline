@@ -100,6 +100,19 @@ oc_mirror_src2disk(){
       file://${SCRATCH}/files
 }
 
+oc_mirror_dryrun(){
+  SCRATCH=${SCRATCH:-${PWD}}
+
+  TMPDIR=${SCRATCH} \
+  oc-mirror --v2 \
+    -c ${SCRATCH}/isc.yaml \
+    --cache-dir ${SCRATCH}/cache \
+    --authfile ${SCRATCH}/pull-secret.txt \
+    --image-timeout 60m \
+    --dry-run \
+      file://${SCRATCH}/files
+}
+
 oc_mirror_disk2mirror(){
   SCRATCH=${SCRATCH:-${PWD}}
   REG_HOST=${REG_HOST:-$(hostname):8443}
