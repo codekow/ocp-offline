@@ -17,3 +17,43 @@ mirror:
           minVersion: 42.105.0
           # maxVersion: 42.105.0
   additionalImages:
+    # https://www.ibm.com/docs/en/tarm/8.20.0?topic=turbonomic-reference-image-listing
+    - name: icr.io/cpopen/turbonomic/action-orchestrator:8.20.0
+    - name: icr.io/cpopen/turbonomic/api:8.20.0
+    - name: icr.io/cpopen/turbonomic/auth:8.20.0
+    - name: icr.io/cpopen/turbonomic/cloud-optimizer:8.20.0
+    - name: icr.io/cpopen/turbonomic/clustermgr:8.20.0
+    - name: icr.io/cpopen/turbonomic/configmap-reload:v0.15.2
+    - name: icr.io/cpopen/turbonomic/consul:8.20.0
+    - name: icr.io/cpopen/turbonomic/container-action-cost:8.20.0
+    - name: icr.io/cpopen/turbonomic/cost:8.20.0
+    - name: icr.io/cpopen/turbonomic/db:8.20.0
+    - name: icr.io/cpopen/turbonomic/diags-anonymizer:8.20.0
+    - name: icr.io/cpopen/turbonomic/group:8.20.0
+    - name: icr.io/cpopen/turbonomic/history:8.20.0
+    - name: icr.io/cpopen/turbonomic/kafka:8.20.0
+    - name: icr.io/cpopen/turbonomic/kinesis-kafka-connect:8.20.0
+    - name: icr.io/cpopen/turbonomic/kube-state-metrics:8.20.0
+    - name: icr.io/cpopen/turbonomic/mediation-udt:8.20.0
+    - name: icr.io/cpopen/turbonomic/market:8.20.0
+    - name: icr.io/cpopen/turbonomic/metadata:8.20.0
+    - name: icr.io/cpopen/turbonomic/mysqld-exporter:8.20.0
+    - name: icr.io/cpopen/turbonomic/nginx:8.20.0
+    - name: icr.io/cpopen/turbonomic/node-exporter:8.20.0
+    - name: icr.io/cpopen/turbonomic/oauth2:8.20.0
+    - name: icr.io/cpopen/turbonomic/plan-orchestrator:8.20.0
+    - name: icr.io/cpopen/turbonomic/prometheus:8.20.0
+    - name: icr.io/cpopen/turbonomic/prometheus-config-manager:8.20.0
+    - name: icr.io/cpopen/turbonomic/prometheus-kafka-adapter:8.20.0
+    - name: icr.io/cpopen/turbonomic/redis:8.20.0
+    - name: icr.io/cpopen/turbonomic/redis_exporter:v1.67.0
+    - name: icr.io/cpopen/turbonomic/repository:8.20.0
+    - name: icr.io/cpopen/turbonomic/rsyslog:8.20.0
+    - name: icr.io/cpopen/turbonomic/server-power-modeler:8.20.0
+    - name: icr.io/cpopen/turbonomic/suspend:8.20.0
+    - name: icr.io/cpopen/turbonomic/sustainability:8.20.0
+    - name: icr.io/cpopen/t8c-operator:42.105
+    - name: icr.io/cpopen/turbonomic/telemetry-scrubber:8.20.0
+    - name: icr.io/cpopen/turbonomic/topology-processor:8.20.0
+    - name: icr.io/cpopen/turbonomic/ui:8.20.0
+    - name: icr.io/cpopen/turbonomic/zookeeper:8.20.0
