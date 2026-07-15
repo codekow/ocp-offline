@@ -1,0 +1,42 @@
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: update-graph
+  namespace: registry
+spec:
+  tags:
+    - name: latest
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: graph-data
+  namespace: registry
+spec:
+  output:
+    to:
+      # kind: DockerImage
+      # name: zot-registry.registry.svc.cluster.local:5000/redhat/openshift/update-graph
+      kind: ImageStreamTag
+      name: 'update-graph:latest'
+  runPolicy: Serial
+  source:
+    dockerfile: |-
+      FROM registry.access.redhat.com/ubi8/ubi:8.1
+
+      RUN curl -L -o cincinnati-graph-data.tar.gz https://github.com/openshift/cincinnati-graph-data/archive/master.tar.gz
+
+      CMD exec /bin/bash -c "mkdir -p /var/lib/cincinnati/graph-data/"
+
+      CMD exec /bin/bash -c "tar xvzf cincinnati-graph-data.tar.gz -C /var/lib/cincinnati/graph-data/ --strip-components=1"
+    type: Dockerfile
+  strategy:
+    dockerStrategy:
+      # from:
+      #   kind: DockerImage
+      #   name: registry.access.redhat.com/ubi8/ubi:8.1
+    type: Docker
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - type: ConfigChange

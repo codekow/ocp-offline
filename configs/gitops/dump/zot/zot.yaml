@@ -1,0 +1,181 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/display-name: Registry - ZOT
+  labels:
+    app: registry
+  name: registry
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app: zot-registry
+  name: zot-registry
+  namespace: registry
+data:
+  config.json: |
+    {
+      "storage": {
+        "rootDirectory": "/var/lib/registry",
+        "commit": false,
+        "dedupe": true,
+        "gc": true,
+        "gcDelay": "1h",
+        "gcInterval": "24h"
+      },
+      "http": {
+        "address": "0.0.0.0",
+        "port": "5000",
+        "realm": "zot",
+        "compat": ["docker2s2"]
+      },
+      "log": {
+        "level": "info"
+      },
+      "extensions": {
+        "search": {
+          "enable": true,
+          "cve": {
+            "updateInterval": "4h"
+          }
+        },
+        "ui": {
+          "enable": true
+        },
+        "mgmt": {
+          "enable": true
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: zot-registry
+  name: zot-registry
+  namespace: registry
+stringData:
+  htpasswd: |
+    # add a user / password with the following
+    # NOTE: the leading extra space so you do not leave a password in shell history
+    #  PASSWORD=alongsecret
+    # echo -n "$PASSWORD" | htpasswd -inB -C10 admin
+    # or
+    # htpasswd -nB -C10 admin
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: zot-registry
+  name: zot-registry
+  namespace: registry
+spec:
+  ports:
+  - name: 5000-tcp
+    port: 5000
+    targetPort: 5000
+  selector:
+    app: zot-registry
+    deploy: zot-registry
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    app: zot-registry
+  name: zot-registry
+  namespace: registry
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: zot-registry
+  name: zot-registry
+  namespace: registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zot-registry
+      deploy: zot-registry
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: zot-registry
+        deploy: zot-registry
+    spec:
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: zot-registry
+        image: ghcr.io/project-zot/zot:latest
+        name: zot-registry
+        ports:
+        - containerPort: 5000
+          name: 5000-tcp
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 200m
+            memory: 32Mi
+        volumeMounts:
+        - mountPath: /etc/zot
+          name: zot-registry-config
+        - mountPath: /etc/secrets
+          name: zot-registry-secret
+        - mountPath: /var/lib/registry
+          name: zot-registry
+      volumes:
+      - name: zot-registry-secret
+        secret:
+          secretName: zot-registry
+      - name: zot-registry-config
+        configMap:
+          name: zot-registry
+      - name: zot-registry
+        persistentVolumeClaim:
+          claimName: zot-registry
+      - emptyDir: {}
+        name: empty
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    app: zot-registry
+  name: docker
+  namespace: registry
+spec:
+  port:
+    targetPort: 5000
+  tls:
+    insecureEdgeTerminationPolicy: Allow
+    termination: edge
+  to:
+    kind: Service
+    name: zot-registry
+    weight: 100
+  wildcardPolicy: None

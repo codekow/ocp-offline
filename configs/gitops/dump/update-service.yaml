@@ -1,0 +1,14 @@
+---
+apiVersion: updateservice.operator.openshift.io/v1
+kind: UpdateService
+metadata:
+  name: main
+  namespace: openshift-update-service
+spec:
+  replicas: 1
+  # graphDataImage: 'zot-registry.registry.svc.cluster.local:5000/redhat/openshift/updates'
+  # releases: zot-registry.registry.svc.cluster.local:5000/redhat/openshift/release-images
+
+  # original source
+  graphDataImage: quay.io/openshift-release-dev/ocp-release
+  releases: quay.io/openshift-release-dev/ocp-release
