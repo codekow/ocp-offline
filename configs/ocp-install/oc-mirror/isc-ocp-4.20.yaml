@@ -8,6 +8,7 @@ mirror:
         type: ocp
         minVersion: 4.20.15
         maxVersion: 4.20.15
+        shortestPath: true
     graph: true
   operators:
     - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.20

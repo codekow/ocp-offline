@@ -19,11 +19,10 @@ oc patch clusterversion/version -p "${PATCH}" --type merge
 cat << FILE > Dockerfile
 FROM registry.access.redhat.com/ubi8/ubi:8.1
 
-RUN curl -L -o cincinnati-graph-data.tar.gz https://github.com/openshift/cincinnati-graph-data/archive/master.tar.gz
+ENV GRAPH_URL=https://github.com/openshift/cincinnati-graph-data/archive/master.tar.gz
 
-CMD exec /bin/bash -c "mkdir -p /var/lib/cincinnati/graph-data/"
-
-CMD exec /bin/bash -c "tar xvzf cincinnati-graph-data.tar.gz -C /var/lib/cincinnati/graph-data/ --strip-components=1"
+RUN mkdir -p /var/lib/cincinnati/graph-data/ && \
+    curl -L "\${GRAPH_URL}" | tar vzx -C /var/lib/cincinnati/graph-data/ --strip-components=1
 FILE
 
 podman build -f ./Dockerfile -t graph-data-image:latest
