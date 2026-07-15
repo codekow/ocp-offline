@@ -9,3 +9,12 @@ mirror:
         minVersion: 4.20.15
         maxVersion: 4.20.15
     graph: true
+  operators:
+    - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.20
+      targetCatalog: redhat/redhat-operator-index
+      targetTag: v4.20
+      packages:
+        - name: cincinnati-operator
+          defaultChannel: v1
+          minVersion: 5.0.3
+          maxVersion: 5.0.3
