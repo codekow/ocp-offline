@@ -4,7 +4,7 @@ metadata:
   name: cincinnati-operator
   namespace: openshift-update-service
 spec:
-  channel: patch-me-see-overlays-dir
+  channel: v1
   installPlanApproval: Automatic
   name: cincinnati-operator
   source: redhat-operators
