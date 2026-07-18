@@ -37,3 +37,4 @@ podman build -f ./Dockerfile -t graph-data-image:latest
 - https://access.redhat.com/labs/ocpupgradegraph/update_path?channel=stable-4.18&arch=x86_64&is_show_hot_fix=false&current_ocp_version=4.18.46&target_ocp_version=4.20.40
 - https://archyslife.blogspot.com/2025/03/openshift-install-and-configure.html
 - https://medium.com/@hillayamir/openshift-update-service-your-personal-over-the-air-update-service-776b43230011
+- https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html-single/disconnected_environments/index#update-service-overview_updating-disconnected-cluster-osus
